@@ -1,1226 +1,1369 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwiftFlow Logistics - Global Shipping Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description"
+        content="Reflect Logistics — nationwide freight across all 50 states. LTL, FTL, reefer, expedited, last-mile, warehousing, cross-dock." />
+    <title>Reflect Logistics | Nationwide Freight Across All 50 States</title>
+
     <style>
         :root {
-            --primary: #FF6B35;
-            --secondary: #004E89;
-            --dark: #1A1A2E;
-            --light: #F7F7F7;
-            --accent: #FFD23F;
-            --text: #2D2D2D;
-            --gray: #6C757D;
+            --bg: #0b1220;
+            --surface: #0f1a2e;
+            --card: rgba(255, 255, 255, 0.06);
+            --card-2: rgba(255, 255, 255, 0.08);
+            --text: rgba(255, 255, 255, 0.92);
+            --muted: rgba(255, 255, 255, 0.72);
+            --faint: rgba(255, 255, 255, 0.55);
+            --border: rgba(255, 255, 255, 0.14);
+            --primary: #3b82f6;
+            /* blue */
+            --primary-2: #60a5fa;
+            --ok: #22c55e;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --radius: 16px;
+            --radius-sm: 12px;
+            --max: 1160px;
         }
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
             color: var(--text);
-            background: var(--light);
-            overflow-x: hidden;
+            background: radial-gradient(1200px 600px at 20% 0%, rgba(59, 130, 246, 0.22), transparent 55%),
+                radial-gradient(900px 500px at 80% 10%, rgba(34, 197, 94, 0.12), transparent 60%),
+                var(--bg);
+            line-height: 1.35;
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        nav.scrolled {
-            padding: 0.5rem 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1400px;
+        .container {
+            max-width: var(--max);
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 20px;
+        }
+
+        /* Accessibility */
+        :focus-visible {
+            outline: 3px solid rgba(96, 165, 250, 0.9);
+            outline-offset: 3px;
+            border-radius: 10px;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            background: rgba(11, 18, 32, 0.72);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
         }
 
         .logo {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2rem;
-            color: var(--accent);
-            letter-spacing: 3px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo::before {
-            content: "⚡";
-            font-size: 2.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 400;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: var(--primary);
-            padding: 0.7rem 1.5rem;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .nav-cta:hover {
-            background: var(--accent);
-            color: var(--dark);
-            transform: translateY(-2px);
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            transition: all 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);
-            animation: slidePattern 20s linear infinite;
-        }
-
-        @keyframes slidePattern {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(20px) translateY(20px); }
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 5.5rem;
-            color: white;
-            line-height: 1;
-            margin-bottom: 1rem;
-            letter-spacing: 5px;
-            animation: slideUp 1s ease-out;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            font-weight: 300;
-            animation: slideUp 1s ease-out 0.2s both;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.8);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-            animation: slideUp 1s ease-out 0.4s both;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            animation: slideUp 1s ease-out 0.6s both;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent);
-            color: var(--dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--dark);
-            transform: translateY(-3px);
-        }
-
-        /* Tracking Section */
-        .tracking-section {
-            background: white;
-            padding: 4rem 2rem;
-            margin-top: -50px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .tracking-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--light);
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-        }
-
-        .tracking-container h2 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-
-        .tracking-form {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .tracking-form input {
-            flex: 1;
-            padding: 1.2rem;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s;
-        }
-
-        .tracking-form input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .tracking-form button {
-            padding: 1.2rem 2.5rem;
-        }
-
-        .tracking-result {
-            margin-top: 2rem;
-            padding: 2rem;
-            background: white;
+            width: 34px;
+            height: 34px;
             border-radius: 10px;
-            display: none;
-            animation: fadeIn 0.5s;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(34, 197, 94, 0.85));
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
         }
 
-        .tracking-result.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tracking-status {
+        nav ul {
             display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            position: relative;
+            gap: 18px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            color: var(--muted);
+            font-weight: 550;
+            font-size: 14px;
         }
 
-        .tracking-status::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #ddd;
-            z-index: 0;
+        nav a {
+            padding: 10px 8px;
+            border-radius: 10px;
         }
 
-        .status-step {
-            flex: 1;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .status-icon {
-            width: 40px;
-            height: 40px;
-            background: #ddd;
-            border-radius: 50%;
-            margin: 0 auto 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .status-step.completed .status-icon {
-            background: var(--primary);
-            color: white;
-        }
-
-        .status-step.active .status-icon {
-            background: var(--accent);
-            color: var(--dark);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .status-label {
-            font-size: 0.85rem;
-            color: var(--gray);
-            font-weight: 600;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 6rem 2rem;
-            background: var(--dark);
-            position: relative;
-        }
-
-        .services::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 50px,
-                rgba(255,255,255,0.02) 50px,
-                rgba(255,255,255,0.02) 100px
-            );
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 3.5rem;
-            color: white;
-            margin-bottom: 1rem;
-            letter-spacing: 3px;
-        }
-
-        .section-header p {
-            color: rgba(255,255,255,0.7);
-            font-size: 1.1rem;
-        }
-
-        .services-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: rgba(255,255,255,0.05);
-            padding: 2.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.08);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-card h3 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.8rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-        }
-
-        .service-card p {
-            color: rgba(255,255,255,0.8);
-            line-height: 1.6;
-        }
-
-        /* Quote Section */
-        .quote-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-        }
-
-        .quote-container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        }
-
-        .quote-container h2 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 2rem;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.06);
             color: var(--text);
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+            font-weight: 650;
+            font-size: 14px;
+        }
+
+        .phone span {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            font-weight: 700;
+            font-size: 14px;
+            transition: transform .15s ease, background .15s ease, border-color .15s ease;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(180deg, rgba(59, 130, 246, 1), rgba(37, 99, 235, 1));
+            box-shadow: 0 12px 26px rgba(59, 130, 246, 0.22);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.10);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--muted);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        .mobile-drawer {
+            display: none;
+            border-top: 1px solid var(--border);
+            padding: 14px 0 18px;
+        }
+
+        .mobile-drawer a {
+            display: block;
+            padding: 10px 12px;
+            border-radius: 12px;
+            color: var(--muted);
+        }
+
+        .mobile-drawer a:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 54px 0 28px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 22px;
+            align-items: stretch;
+        }
+
+        .kicker {
+            display: inline-flex;
+            gap: 10px;
+            align-items: center;
+            color: var(--muted);
+            font-weight: 650;
+            font-size: 13px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+            width: fit-content;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--ok);
+            box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.15);
+        }
+
+        h1 {
+            margin: 14px 0 10px;
+            font-size: clamp(34px, 4.2vw, 52px);
+            line-height: 1.05;
+            letter-spacing: -0.6px;
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 56ch;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 18px 0 14px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 14px 0 8px;
+        }
+
+        .badge {
+            font-size: 12px;
+            color: var(--muted);
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+        }
+
+        .proof {
+            color: var(--faint);
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .panel {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+            height: 100%;
+        }
+
+        .panel h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+        }
+
+        .panel p {
+            margin: 0 0 14px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .field {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0 10px;
+        }
+
+        input,
+        select,
+        textarea {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+            padding: 12px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(11, 18, 32, 0.35);
+            color: var(--text);
+            font-size: 14px;
             outline: none;
-            border-color: var(--primary);
         }
 
-        .form-row {
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .helper {
+            font-size: 12px;
+            color: var(--faint);
+            margin-top: 8px;
+        }
+
+        /* Sections */
+        section {
+            padding: 56px 0;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: 26px;
+            letter-spacing: -0.35px;
+        }
+
+        .section-head p {
+            margin: 6px 0 0;
+            color: var(--muted);
+            max-width: 70ch;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            transition: transform .15s ease, background .15s ease, border-color .15s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .card-top {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            background: rgba(59, 130, 246, 0.18);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+        }
+
+        .card p {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .inline-chips {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .chip {
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+        }
+
+        /* How it works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .step-num {
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 0.6px;
+            color: rgba(96, 165, 250, 0.95);
+            text-transform: uppercase;
+        }
+
+        /* Coverage */
+        .coverage {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 14px;
+            align-items: stretch;
+        }
+
+        .map {
+            min-height: 320px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background:
+                radial-gradient(600px 320px at 30% 30%, rgba(59, 130, 246, 0.20), transparent 55%),
+                radial-gradient(520px 280px at 70% 60%, rgba(34, 197, 94, 0.12), transparent 55%),
+                rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .lanes ul {
+            margin: 10px 0 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .lanes li {
+            margin: 6px 0;
+        }
+
+        /* Testimonials */
+        .quote {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .byline {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--faint);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* CTA band */
+        .cta-band {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(34, 197, 94, 0.10));
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: var(--radius);
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            box-shadow: var(--shadow);
+        }
+
+        form .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        form .row-1 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
         }
 
         textarea {
+            min-height: 92px;
             resize: vertical;
-            min-height: 120px;
         }
 
-        .submit-message {
-            display: none;
-            padding: 1rem;
-            background: #d4edda;
-            color: #155724;
-            border-radius: 5px;
-            margin-top: 1rem;
-            text-align: center;
-            animation: fadeIn 0.5s;
+        /* FAQ */
+        .faq {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.04);
         }
 
-        .submit-message.active {
-            display: block;
+        .faq-item {
+            border-top: 1px solid var(--border);
         }
 
-        /* Features Section */
-        .features {
-            padding: 6rem 2rem;
-            background: white;
+        .faq-item:first-child {
+            border-top: none;
         }
 
-        .features-grid {
-            max-width: 1400px;
-            margin: 3rem auto 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-        }
-
-        .feature-item {
-            text-align: center;
-        }
-
-        .feature-number {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 4rem;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .feature-item h3 {
-            font-size: 1.3rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .feature-item p {
-            color: var(--gray);
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 6rem 2rem;
-            background: var(--light);
-        }
-
-        .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-info h3 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2rem;
-            color: var(--dark);
-            margin-bottom: 2rem;
-            letter-spacing: 1px;
-        }
-
-        .contact-item {
+        .faq-q {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: 0;
+            color: var(--text);
+            padding: 14px 16px;
+            font-size: 14px;
+            font-weight: 750;
             display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
         }
 
-        .contact-item-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-top: 0.2rem;
+        .faq-a {
+            padding: 0 16px 14px;
+            color: var(--muted);
+            font-size: 13px;
+            display: none;
         }
 
-        .contact-item h4 {
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--dark);
+        .faq-item[open] .faq-a {
+            display: block;
         }
 
-        .contact-item p {
-            color: var(--gray);
+        .chev {
+            opacity: .75;
         }
 
         /* Footer */
         footer {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 2rem 1rem;
+            border-top: 1px solid var(--border);
+            padding: 34px 0 86px;
+            /* leave room for mobile sticky bar */
+            color: var(--muted);
         }
 
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 18px;
         }
 
-        .footer-section h4 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
+        .footer-grid h4 {
+            margin: 0 0 10px;
+            color: var(--text);
+            font-size: 14px;
         }
 
-        .footer-section ul {
-            list-style: none;
+        .footer-grid a {
+            display: block;
+            padding: 6px 0;
+            color: var(--muted);
         }
 
-        .footer-section ul li {
-            margin-bottom: 0.7rem;
+        .footer-grid a:hover {
+            color: var(--text);
         }
 
-        .footer-section ul li a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-section ul li a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
-        }
-
-        .social-links {
+        .legal {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border);
+            padding-top: 14px;
+            color: var(--faint);
+            font-size: 12px;
         }
 
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
+        /* Mobile sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(11, 18, 32, 0.85);
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+            display: none;
+            z-index: 60;
         }
 
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
+        .sticky-cta .wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            max-width: var(--max);
+            margin: 0 auto;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
+        @media (max-width: 980px) {
+            nav ul {
+                display: none;
             }
 
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                flex-direction: column;
-                background: var(--dark);
-                width: 100%;
-                padding: 2rem;
-                transition: left 0.3s;
-                gap: 1.5rem;
+            .hamburger {
+                display: inline-flex;
             }
 
-            .nav-links.active {
-                left: 0;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .tracking-form {
-                flex-direction: column;
-            }
-
-            .tracking-status {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .tracking-status::before {
-                width: 3px;
-                height: 100%;
-                left: 20px;
-                top: 0;
-            }
-
-            .form-row {
+            .hero-grid {
                 grid-template-columns: 1fr;
             }
 
-            .contact-container {
+            .grid-3 {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
 
-            .section-header h2 {
-                font-size: 2.5rem;
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .coverage {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-band {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .phone {
+                display: none;
+            }
+
+            /* keep click-to-call in sticky bar */
+            .sticky-cta {
+                display: block;
+            }
+
+            header .btn-secondary {
+                display: none;
+            }
+
+            /* Track via hero + menu */
+        }
+
+        @media (max-width: 560px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            form .row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">SwiftFlow</a>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#tracking">Tracking</a></li>
-                <li><a href="#quote">Get Quote</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#quote" class="nav-cta">Request Quote</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>GLOBAL LOGISTICS<br>SIMPLIFIED</h1>
-            <p class="subtitle">Fast. Reliable. Worldwide.</p>
-            <p>We deliver your cargo across continents with precision timing and complete transparency. From air freight to ocean shipping, trust SwiftFlow for all your logistics needs.</p>
-            <div class="hero-buttons">
-                <a href="#tracking" class="btn btn-primary">Track Shipment</a>
-                <a href="#quote" class="btn btn-outline">Get a Quote</a>
-            </div>
-        </div>
-    </section>
+    <header>
+        <div class="container nav" aria-label="Primary">
+            <a class="brand" href="#top" aria-label="Reflect Logistics home">
+                <div class="logo" aria-hidden="true"></div>
+                <div>Reflect Logistics</div>
+            </a>
 
-    <!-- Tracking Section -->
-    <section class="tracking-section" id="tracking">
-        <div class="tracking-container">
-            <h2>Track Your Shipment</h2>
-            <p style="text-align: center; color: var(--gray); margin-bottom: 1rem;">Enter your tracking number to get real-time updates</p>
-            <form class="tracking-form" id="trackingForm">
-                <input type="text" id="trackingNumber" placeholder="Enter tracking number (e.g., SF123456789)" required>
-                <button type="submit" class="btn btn-primary">Track Now</button>
-            </form>
-            <div class="tracking-result" id="trackingResult">
-                <h3 style="color: var(--dark); margin-bottom: 1rem;">Tracking Number: <span id="displayTrackingNumber"></span></h3>
-                <p style="margin-bottom: 1rem;"><strong>Status:</strong> <span id="currentStatus">In Transit</span></p>
-                <p style="margin-bottom: 1rem;"><strong>Origin:</strong> <span id="origin">Los Angeles, USA</span></p>
-                <p style="margin-bottom: 1rem;"><strong>Destination:</strong> <span id="destination">Tokyo, Japan</span></p>
-                <p style="margin-bottom: 1rem;"><strong>Estimated Delivery:</strong> <span id="estimatedDelivery">Feb 15, 2026</span></p>
-                
-                <div class="tracking-status">
-                    <div class="status-step completed">
-                        <div class="status-icon">📦</div>
-                        <div class="status-label">Picked Up</div>
-                    </div>
-                    <div class="status-step completed">
-                        <div class="status-icon">🏭</div>
-                        <div class="status-label">Processing</div>
-                    </div>
-                    <div class="status-step active">
-                        <div class="status-icon">✈️</div>
-                        <div class="status-label">In Transit</div>
-                    </div>
-                    <div class="status-step">
-                        <div class="status-icon">🚚</div>
-                        <div class="status-label">Out for Delivery</div>
-                    </div>
-                    <div class="status-step">
-                        <div class="status-icon">✅</div>
-                        <div class="status-label">Delivered</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="section-header">
-            <h2>OUR SERVICES</h2>
-            <p>Comprehensive logistics solutions tailored to your business needs</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">✈️</div>
-                <h3>Air Freight</h3>
-                <p>Fast and secure air cargo services with global coverage. Perfect for time-sensitive shipments requiring expedited delivery worldwide.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🚢</div>
-                <h3>Ocean Freight</h3>
-                <p>Cost-effective sea shipping solutions for large-volume cargo. Full container load (FCL) and less than container load (LCL) options available.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🚚</div>
-                <h3>Ground Transport</h3>
-                <p>Reliable road freight services for domestic and cross-border deliveries. Door-to-door service with real-time tracking capabilities.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📦</div>
-                <h3>Warehousing</h3>
-                <p>State-of-the-art storage facilities with inventory management systems. Climate-controlled options and flexible storage solutions.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🌐</div>
-                <h3>Customs Clearance</h3>
-                <p>Expert customs brokerage services to streamline international shipping. Complete documentation and compliance support.</p>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📊</div>
-                <h3>Supply Chain</h3>
-                <p>End-to-end supply chain management solutions. Optimize your logistics operations with our expert consulting services.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <div class="section-header">
-            <h2 style="color: var(--dark);">WHY CHOOSE US</h2>
-            <p style="color: var(--gray);">Numbers that speak for themselves</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-item">
-                <span class="feature-number">150+</span>
-                <h3>Countries Served</h3>
-                <p>Global network coverage</p>
-            </div>
-            <div class="feature-item">
-                <span class="feature-number">24/7</span>
-                <h3>Customer Support</h3>
-                <p>Always here to help</p>
-            </div>
-            <div class="feature-item">
-                <span class="feature-number">99.8%</span>
-                <h3>On-Time Delivery</h3>
-                <p>Industry-leading reliability</p>
-            </div>
-            <div class="feature-item">
-                <span class="feature-number">500K+</span>
-                <h3>Shipments Handled</h3>
-                <p>Annual delivery volume</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quote Section -->
-    <section class="quote-section" id="quote">
-        <div class="quote-container">
-            <h2>Request a Quote</h2>
-            <form id="quoteForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fullName">Full Name *</label>
-                        <input type="text" id="fullName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company Name</label>
-                        <input type="text" id="company">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="serviceType">Service Type *</label>
-                        <select id="serviceType" required>
-                            <option value="">Select a service</option>
-                            <option value="air">Air Freight</option>
-                            <option value="ocean">Ocean Freight</option>
-                            <option value="ground">Ground Transport</option>
-                            <option value="warehousing">Warehousing</option>
-                            <option value="customs">Customs Clearance</option>
-                            <option value="supply">Supply Chain Management</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="weight">Estimated Weight (kg)</label>
-                        <input type="number" id="weight" placeholder="e.g., 500">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="origin">Origin City *</label>
-                        <input type="text" id="origin" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="destination">Destination City *</label>
-                        <input type="text" id="destination" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="details">Additional Details</label>
-                    <textarea id="details" placeholder="Tell us more about your shipment requirements..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Get Quote</button>
-                <div class="submit-message" id="quoteMessage">
-                    Thank you! We've received your quote request and will contact you within 24 hours.
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="section-header">
-            <h2 style="color: var(--dark);">GET IN TOUCH</h2>
-            <p style="color: var(--gray);">We're here to answer your questions</p>
-        </div>
-        <div class="contact-container">
-            <div class="contact-info">
-                <h3>Contact Information</h3>
-                <div class="contact-item">
-                    <div class="contact-item-icon">📍</div>
-                    <div>
-                        <h4>Address</h4>
-                        <p>1234 Logistics Boulevard<br>Los Angeles, CA 90001, USA</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon">📞</div>
-                    <div>
-                        <h4>Phone</h4>
-                        <p>+1 (800) 123-4567<br>+1 (800) 765-4321</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon">✉️</div>
-                    <div>
-                        <h4>Email</h4>
-                        <p>info@swiftflow.com<br>support@swiftflow.com</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon">⏰</div>
-                    <div>
-                        <h4>Business Hours</h4>
-                        <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
-                    </div>
-                </div>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">📘</a>
-                    <a href="#" aria-label="Twitter">🐦</a>
-                    <a href="#" aria-label="LinkedIn">💼</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                </div>
-            </div>
-            <div>
-                <h3 style="font-family: 'Bebas Neue', cursive; font-size: 2rem; color: var(--dark); margin-bottom: 1.5rem; letter-spacing: 1px;">Send Us a Message</h3>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="contactName">Name *</label>
-                        <input type="text" id="contactName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contactEmail">Email *</label>
-                        <input type="email" id="contactEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject *</label>
-                        <input type="text" id="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                    <div class="submit-message" id="contactMessage">
-                        Thank you for your message! We'll get back to you soon.
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>SwiftFlow Logistics</h4>
-                <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">Your trusted partner in global logistics. Delivering excellence across continents since 2010.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
+            <nav aria-label="Site">
                 <ul>
-                    <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#tracking">Track Shipment</a></li>
-                    <li><a href="#quote">Get Quote</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#how">How it Works</a></li>
+                    <li><a href="#coverage">Coverage</a></li>
+                    <li><a href="#why">Why Reflect</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                 </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#">Air Freight</a></li>
-                    <li><a href="#">Ocean Freight</a></li>
-                    <li><a href="#">Ground Transport</a></li>
-                    <li><a href="#">Warehousing</a></li>
-                    <li><a href="#">Customs Clearance</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
+            </nav>
+
+            <div class="nav-right">
+                <a class="phone" href="tel:6674154193" aria-label="Call 667-415-4193">
+                    <span>Call</span> 667-415-4193
+                </a>
+
+                <button class="btn btn-ghost hamburger" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
+                    Menu
+                </button>
+
+                <a class="btn btn-secondary" href="#track">Track Shipment</a>
+                <a class="btn btn-primary" href="#quote">Get a Quote</a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 SwiftFlow Logistics. All rights reserved.</p>
+
+        <div class="container mobile-drawer" id="mobileMenu" hidden>
+            <a href="#services">Services</a>
+            <a href="#how">How it Works</a>
+            <a href="#coverage">Coverage</a>
+            <a href="#why">Why Reflect</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#faq">FAQ</a>
+            <a href="#track">Track Shipment</a>
+            <a href="#quote">Get a Quote</a>
+            <a href="mailto:info@reflectlogistic.com">Email: info@reflectlogistic.com</a>
+        </div>
+    </header>
+
+    <main id="top">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <div class="kicker"><span class="dot" aria-hidden="true"></span> Nationwide freight across all 50
+                        states</div>
+                    <h1>Freight that moves like clockwork—across all 50 states.</h1>
+                    <p class="lead">
+                        Ship LTL, FTL, reefer, expedited, and last-mile with a team that prioritizes visibility, safety,
+                        and on-time execution.
+                        Get a fast quote or track a load in seconds.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#quote">Get a Quote</a>
+                        <a class="btn btn-secondary" href="#track">Track Shipment</a>
+                    </div>
+
+                    <div class="badges" aria-label="Trust badges">
+                        <span class="badge">Insured Carrier Network</span>
+                        <span class="badge">Safety-First Operations</span>
+                        <span class="badge">Real-time Updates</span>
+                        <span class="badge">US Nationwide Coverage</span>
+                    </div>
+
+                    <p class="proof">
+                        Trusted by shippers who value clear communication and consistent delivery—<strong>[STAT] on-time
+                            performance</strong> and <strong>[STAT] shipments managed</strong>.
+                        <span style="display:block; margin-top:6px;">Same-day callback. Prefer to talk now? Call <a
+                                href="tel:6674154193" style="text-decoration:underline;">667-415-4193</a>.</span>
+                    </p>
+                </div>
+
+                <!-- Track card -->
+                <div class="panel" id="track">
+                    <h3>Track Shipment</h3>
+                    <p>Enter your Tracking ID to check the latest status.</p>
+
+                    <div class="field" role="group" aria-label="Tracking input group">
+                        <input type="text" name="tracking" placeholder="Enter Tracking ID" aria-label="Tracking ID" />
+                        <button class="btn btn-primary" type="button">Track</button>
+                    </div>
+
+                    <div class="helper">
+                        If you don’t have a Tracking ID, request an update at
+                        <a href="mailto:info@reflectlogistic.com"
+                            style="text-decoration:underline;">info@reflectlogistic.com</a>.
+                    </div>
+
+                    <div class="inline-chips" style="margin-top:14px;">
+                        <span class="chip">LTL</span><span class="chip">FTL</span><span class="chip">Reefer</span>
+                        <span class="chip">Expedited</span><span class="chip">Last-mile</span><span
+                            class="chip">Warehousing</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Services built for real-world freight</h2>
+                        <p>Flexible options, one accountable partner.</p>
+                    </div>
+                </div>
+
+                <div class="grid-3" role="list" aria-label="Service cards">
+                    <div class="card" role="listitem">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">🚚</div>
+                            <div>
+                                <h3>LTL (Less-Than-Truckload)</h3>
+                                <p>Reduce cost without losing schedule control.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" role="listitem">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">🛻</div>
+                            <div>
+                                <h3>FTL (Full Truckload)</h3>
+                                <p>Dedicated capacity for time-critical lanes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" role="listitem">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">⚡</div>
+                            <div>
+                                <h3>Expedited</h3>
+                                <p>When “tomorrow” is the only acceptable answer.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" role="listitem">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">❄️</div>
+                            <div>
+                                <h3>Reefer (Temperature-Controlled)</h3>
+                                <p>Cold chain handled with care and documentation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" role="listitem">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">🏢</div>
+                            <div>
+                                <h3>Warehousing</h3>
+                                <p>Short- or long-term storage that supports your flow.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" role="listitem">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">📦</div>
+                            <div>
+                                <h3>Last-mile / Final Delivery</h3>
+                                <p>A clean handoff from dock to doorstep.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inline-chips" aria-label="Additional services">
+                    <span class="chip">Also available: Cross-dock</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section id="how">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>How it works</h2>
+                        <p>Simple steps. Fewer surprises.</p>
+                    </div>
+                    <a class="btn btn-secondary" href="#quote">Get a Quote</a>
+                </div>
+
+                <div class="steps">
+                    <div class="card">
+                        <div class="step-num">Step 1</div>
+                        <h3>Request</h3>
+                        <p>Send shipment details and priorities (speed, cost, handling).</p>
+                    </div>
+                    <div class="card">
+                        <div class="step-num">Step 2</div>
+                        <h3>Pickup</h3>
+                        <p>We confirm pickup window and documentation.</p>
+                    </div>
+                    <div class="card">
+                        <div class="step-num">Step 3</div>
+                        <h3>In transit</h3>
+                        <p>Clear status updates and exception handling when needed.</p>
+                    </div>
+                    <div class="card">
+                        <div class="step-num">Step 4</div>
+                        <h3>Delivered</h3>
+                        <p>Proof of delivery and close-out details shared promptly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COVERAGE -->
+        <section id="coverage">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Nationwide coverage—All 50 states</h2>
+                        <p>Common lanes, uncommon consistency.</p>
+                    </div>
+                </div>
+
+                <div class="coverage">
+                    <div class="map" aria-label="US coverage map placeholder">
+                        <div>
+                            <strong style="display:block; font-size:16px; color: var(--text);">US Map
+                                Placeholder</strong>
+                            <div style="margin-top:8px; color: var(--muted); font-size:13px;">
+                                Replace with an optimized SVG map highlighting nationwide coverage.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel lanes">
+                        <h3>Primary lanes</h3>
+                        <p>We support recurring lanes and spot coverage based on your pickup/delivery requirements.</p>
+                        <ul>
+                            <li>Midwest ↔ Southeast</li>
+                            <li>Northeast ↔ Mid-Atlantic</li>
+                            <li>Texas ↔ West Coast</li>
+                            <li>Nationwide spot coverage</li>
+                        </ul>
+                        <p class="helper" style="margin-top:10px;">
+                            Need a custom lane? Share your ZIPs and constraints in the quote form.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE US -->
+        <section id="why">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>Why Reflect Logistics</h2>
+                        <p>Enterprise-grade execution with a human point of contact.</p>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">🧭</div>
+                            <div>
+                                <h3>Reliability you can plan around</h3>
+                                <p>Clear ETAs, proactive exception management.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">👁️</div>
+                            <div>
+                                <h3>Visibility without the noise</h3>
+                                <p>Meaningful updates at the moments that matter.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">🧾</div>
+                            <div>
+                                <h3>Pricing that stays explainable</h3>
+                                <p>Transparent quote inputs and scope clarity.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">🛡️</div>
+                            <div>
+                                <h3>Safety & handling standards</h3>
+                                <p>Carrier compliance and shipment protection practices.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-top">
+                            <div class="icon" aria-hidden="true">📞</div>
+                            <div>
+                                <h3>Responsive support</h3>
+                                <p>One team, reachable by phone when it’s urgent.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section id="testimonials">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>What shippers say</h2>
+                        <p>The difference is consistency and communication.</p>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>“Less chasing, more clarity.”</h3>
+                        <p class="quote">“Reflect Logistics kept us updated without us chasing. Pickup happened when
+                            promised and delivery was clean.”</p>
+                        <div class="byline">— [Name], [Title], [Company]</div>
+                    </div>
+                    <div class="card">
+                        <h3>“Expedited done right.”</h3>
+                        <p class="quote">“Expedited shipment went smoothly—clear expectations and fast coordination.”
+                        </p>
+                        <div class="byline">— [Name], [Title], [Company]</div>
+                    </div>
+                    <div class="card">
+                        <h3>“Consistent partner.”</h3>
+                        <p class="quote">“Solid partner for LTL and FTL. They’re responsive, and issues get handled
+                            quickly.”</p>
+                        <div class="byline">— [Name], [Title], [Company]</div>
+                    </div>
+                </div>
+
+                <div class="stats" aria-label="Quick stats">
+                    <div class="stat"><strong>[STAT]%</strong><span>On-time performance</span></div>
+                    <div class="stat"><strong>[STAT]+</strong><span>Monthly shipments</span></div>
+                    <div class="stat"><strong>[STAT]</strong><span>Avg. quote turnaround (mins)</span></div>
+                    <div class="stat"><strong>All 50 states</strong><span>Coverage</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA + QUOTE FORM -->
+        <section id="quote">
+            <div class="container">
+                <div class="cta-band" role="region" aria-label="Get a Quote">
+                    <div>
+                        <h2 style="margin:0; font-size:24px; letter-spacing:-0.3px;">Get a fast, accurate freight quote
+                        </h2>
+                        <p style="margin:8px 0 0; color: var(--muted);">
+                            Share ZIPs and shipment type—our team will respond with options.
+                        </p>
+                        <p class="helper" style="margin-top:10px;">
+                            Prefer to talk now? Call <a href="tel:6674154193"
+                                style="text-decoration:underline;">667-415-4193</a>
+                            or email <a href="mailto:info@reflectlogistic.com"
+                                style="text-decoration:underline;">info@reflectlogistic.com</a>.
+                        </p>
+                    </div>
+
+                    <form aria-label="Quote form">
+                        <div class="row">
+                            <input type="text" name="pickupZip" placeholder="Pickup ZIP" aria-label="Pickup ZIP" />
+                            <input type="text" name="deliveryZip" placeholder="Delivery ZIP"
+                                aria-label="Delivery ZIP" />
+                        </div>
+
+                        <div class="row">
+                            <select name="shipmentType" aria-label="Shipment type">
+                                <option value="">Shipment type</option>
+                                <option>LTL</option>
+                                <option>FTL</option>
+                                <option>Reefer</option>
+                                <option>Expedited</option>
+                                <option>Last-mile</option>
+                                <option>Warehousing</option>
+                                <option>Cross-dock</option>
+                            </select>
+                            <input type="text" name="contactName" placeholder="Contact name"
+                                aria-label="Contact name" />
+                        </div>
+
+                        <div class="row">
+                            <input type="text" name="contact" placeholder="Email or phone"
+                                aria-label="Email or phone" />
+                            <select name="priority" aria-label="Priority">
+                                <option value="">What matters most?</option>
+                                <option>Speed</option>
+                                <option>Cost</option>
+                                <option>Handling</option>
+                                <option>Appointment delivery</option>
+                            </select>
+                        </div>
+
+                        <div class="row-1">
+                            <textarea name="notes"
+                                placeholder="Optional notes (weight, pallets, dimensions, special handling, deadlines)"
+                                aria-label="Notes"></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="submit">Get a Quote</button>
+                            <a class="btn btn-secondary" href="#track">Track Shipment</a>
+                        </div>
+
+                        <div class="helper">No spam. We’ll only use this to respond to your request.</div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <h2>FAQ</h2>
+                        <p>Quick answers for quoting, tracking, and service coverage.</p>
+                    </div>
+                </div>
+
+                <div class="faq" role="region" aria-label="Frequently asked questions">
+                    <div class="faq-item" open>
+                        <button class="faq-q" type="button" aria-expanded="true">
+                            What information do you need to quote a shipment?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            Pickup ZIP, delivery ZIP, shipment type (LTL/FTL/etc.), and basic details like
+                            weight/dimensions or pallet count if available.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            Do you cover all 50 states?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            Yes—Reflect Logistics supports shipping across all 50 states. Availability may vary by
+                            service and lane.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            Can you handle temperature-controlled (reefer) freight?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            Yes. Share required temperature range and any handling notes in your request.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            How do tracking updates work?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            Use the Tracking ID field to check status. If you prefer, our team can provide updates by
+                            email or phone.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            Do you offer warehousing and cross-dock?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            Yes. Tell us location, timing, and throughput requirements, and we’ll propose the right
+                            setup.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            Can you support expedited and last-mile delivery?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            Yes. For expedited, include pickup deadline and delivery deadline. For last-mile, include
+                            delivery constraints (appointment, liftgate, etc.).
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            What’s your process if something changes in transit?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            We surface exceptions quickly and coordinate next steps (re-route, reschedule, or alternate
+                            options) with your approval.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-q" type="button" aria-expanded="false">
+                            How do I contact support?
+                            <span class="chev">▾</span>
+                        </button>
+                        <div class="faq-a">
+                            Call <a href="tel:6674154193" style="text-decoration:underline;">667-415-4193</a> or email
+                            <a href="mailto:info@reflectlogistic.com"
+                                style="text-decoration:underline;">info@reflectlogistic.com</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Reflect Logistics</h4>
+                    <div style="color: var(--muted); font-size:13px;">
+                        Premium freight services across all 50 states. LTL, FTL, last-mile, warehousing, cross-dock,
+                        reefer, expedited.
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Contact</h4>
+                    <a href="tel:6674154193">667-415-4193</a>
+                    <a href="mailto:info@reflectlogistic.com">info@reflectlogistic.com</a>
+                </div>
+
+                <div>
+                    <h4>Services</h4>
+                    <a href="#services">LTL</a>
+                    <a href="#services">FTL</a>
+                    <a href="#services">Last-mile</a>
+                    <a href="#services">Warehousing</a>
+                    <a href="#services">Cross-dock</a>
+                    <a href="#services">Reefer</a>
+                    <a href="#services">Expedited</a>
+                </div>
+
+                <div>
+                    <h4>Quick links</h4>
+                    <a href="#quote">Get a Quote</a>
+                    <a href="#track">Track Shipment</a>
+                    <a href="#coverage">Coverage</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#privacy">Privacy</a>
+                    <a href="#terms">Terms</a>
+                </div>
+            </div>
+
+            <div class="legal">
+                <div>© <span id="year"></span> Reflect Logistics. All rights reserved.</div>
+                <div><a id="privacy" href="#" style="text-decoration:underline;">Privacy</a> · <a id="terms" href="#"
+                        style="text-decoration:underline;">Terms</a></div>
+            </div>
         </div>
     </footer>
 
+    <!-- Mobile sticky bottom CTA -->
+    <div class="sticky-cta" role="region" aria-label="Quick actions">
+        <div class="wrap">
+            <a class="btn btn-secondary" href="tel:6674154193" aria-label="Call 667-415-4193">Call</a>
+            <a class="btn btn-primary" href="#quote">Get a Quote</a>
+        </div>
+    </div>
+
     <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
-
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+        // Mobile menu toggle
+        const btn = document.getElementById('menuBtn');
+        const menu = document.getElementById('mobileMenu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                const isOpen = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!isOpen));
+                menu.hidden = isOpen;
             });
-        });
+        }
 
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        // FAQ accordion (lightweight)
+        document.querySelectorAll('.faq-item .faq-q').forEach((q) => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const isOpen = item.hasAttribute('open');
+                // close others for tight UX
+                document.querySelectorAll('.faq-item[open]').forEach(el => el.removeAttribute('open'));
+                document.querySelectorAll('.faq-q').forEach(el => el.setAttribute('aria-expanded', 'false'));
+                if (!isOpen) {
+                    item.setAttribute('open', '');
+                    q.setAttribute('aria-expanded', 'true');
                 }
             });
         });
 
-        // Tracking Form
-        const trackingForm = document.getElementById('trackingForm');
-        const trackingResult = document.getElementById('trackingResult');
-        const trackingNumber = document.getElementById('trackingNumber');
-        const displayTrackingNumber = document.getElementById('displayTrackingNumber');
+        // Footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        trackingForm.addEventListener('submit', (e) => {
+        // Prevent form submission demo
+        document.querySelector('form[aria-label="Quote form"]')?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const number = trackingNumber.value;
-            
-            // Simulate tracking lookup
-            displayTrackingNumber.textContent = number;
-            trackingResult.classList.add('active');
-            
-            // Scroll to result
-            trackingResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            // Reset form
-            trackingForm.reset();
-        });
-
-        // Quote Form
-        const quoteForm = document.getElementById('quoteForm');
-        const quoteMessage = document.getElementById('quoteMessage');
-
-        quoteForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Show success message
-            quoteMessage.classList.add('active');
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                quoteMessage.classList.remove('active');
-            }, 5000);
-            
-            // Reset form
-            quoteForm.reset();
-            
-            // Scroll to message
-            quoteMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        });
-
-        // Contact Form
-        const contactForm = document.getElementById('contactForm');
-        const contactMessage = document.getElementById('contactMessage');
-
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Show success message
-            contactMessage.classList.add('active');
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                contactMessage.classList.remove('active');
-            }, 5000);
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Scroll to message
-            contactMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        });
-
-        // Intersection Observer for animations on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe service cards
-        document.querySelectorAll('.service-card').forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
-            observer.observe(card);
-        });
-
-        // Observe feature items
-        document.querySelectorAll('.feature-item').forEach((item, index) => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(30px)';
-            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
-            observer.observe(item);
+            alert('Form demo: connect this to your CRM or email workflow.');
         });
     </script>
+
 </body>
+
 </html>
