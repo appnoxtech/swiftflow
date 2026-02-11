@@ -1,1369 +1,1270 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description"
-        content="Reflect Logistics — nationwide freight across all 50 states. LTL, FTL, reefer, expedited, last-mile, warehousing, cross-dock." />
-    <title>Reflect Logistics | Nationwide Freight Across All 50 States</title>
-
-    <style>
-        :root {
-            --bg: #0b1220;
-            --surface: #0f1a2e;
-            --card: rgba(255, 255, 255, 0.06);
-            --card-2: rgba(255, 255, 255, 0.08);
-            --text: rgba(255, 255, 255, 0.92);
-            --muted: rgba(255, 255, 255, 0.72);
-            --faint: rgba(255, 255, 255, 0.55);
-            --border: rgba(255, 255, 255, 0.14);
-            --primary: #3b82f6;
-            /* blue */
-            --primary-2: #60a5fa;
-            --ok: #22c55e;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-            --radius: 16px;
-            --radius-sm: 12px;
-            --max: 1160px;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-            color: var(--text);
-            background: radial-gradient(1200px 600px at 20% 0%, rgba(59, 130, 246, 0.22), transparent 55%),
-                radial-gradient(900px 500px at 80% 10%, rgba(34, 197, 94, 0.12), transparent 60%),
-                var(--bg);
-            line-height: 1.35;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .container {
-            max-width: var(--max);
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Accessibility */
-        :focus-visible {
-            outline: 3px solid rgba(96, 165, 250, 0.9);
-            outline-offset: 3px;
-            border-radius: 10px;
-        }
-
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            backdrop-filter: blur(10px);
-            background: rgba(11, 18, 32, 0.72);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 76px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-        }
-
-        .logo {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(34, 197, 94, 0.85));
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
-        }
-
-        nav ul {
-            display: flex;
-            gap: 18px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            color: var(--muted);
-            font-weight: 550;
-            font-size: 14px;
-        }
-
-        nav a {
-            padding: 10px 8px;
-            border-radius: 10px;
-        }
-
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .phone {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.04);
-            font-weight: 650;
-            font-size: 14px;
-        }
-
-        .phone span {
-            color: var(--muted);
-            font-weight: 600;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 1px solid transparent;
-            font-weight: 700;
-            font-size: 14px;
-            transition: transform .15s ease, background .15s ease, border-color .15s ease;
-            cursor: pointer;
-            user-select: none;
-            white-space: nowrap;
-        }
-
-        .btn:active {
-            transform: translateY(1px);
-        }
-
-        .btn-primary {
-            background: linear-gradient(180deg, rgba(59, 130, 246, 1), rgba(37, 99, 235, 1));
-            box-shadow: 0 12px 26px rgba(59, 130, 246, 0.22);
-        }
-
-        .btn-primary:hover {
-            filter: brightness(1.05);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--border);
-            color: var(--text);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.10);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            border-color: var(--border);
-            color: var(--muted);
-        }
-
-        .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text);
-        }
-
-        .hamburger {
-            display: none;
-        }
-
-        .mobile-drawer {
-            display: none;
-            border-top: 1px solid var(--border);
-            padding: 14px 0 18px;
-        }
-
-        .mobile-drawer a {
-            display: block;
-            padding: 10px 12px;
-            border-radius: 12px;
-            color: var(--muted);
-        }
-
-        .mobile-drawer a:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text);
-        }
-
-        /* Hero */
-        .hero {
-            padding: 54px 0 28px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 22px;
-            align-items: stretch;
-        }
-
-        .kicker {
-            display: inline-flex;
-            gap: 10px;
-            align-items: center;
-            color: var(--muted);
-            font-weight: 650;
-            font-size: 13px;
-            padding: 8px 12px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 999px;
-            width: fit-content;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 999px;
-            background: var(--ok);
-            box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.15);
-        }
-
-        h1 {
-            margin: 14px 0 10px;
-            font-size: clamp(34px, 4.2vw, 52px);
-            line-height: 1.05;
-            letter-spacing: -0.6px;
-        }
-
-        .lead {
-            color: var(--muted);
-            font-size: 16px;
-            max-width: 56ch;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 18px 0 14px;
-        }
-
-        .badges {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 14px 0 8px;
-        }
-
-        .badge {
-            font-size: 12px;
-            color: var(--muted);
-            padding: 8px 10px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 999px;
-        }
-
-        .proof {
-            color: var(--faint);
-            font-size: 13px;
-            margin-top: 8px;
-        }
-
-        .panel {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 18px;
-            height: 100%;
-        }
-
-        .panel h3 {
-            margin: 0 0 6px;
-            font-size: 16px;
-            letter-spacing: -0.2px;
-        }
-
-        .panel p {
-            margin: 0 0 14px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .field {
-            display: flex;
-            gap: 10px;
-            margin: 10px 0 10px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px 12px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: rgba(11, 18, 32, 0.35);
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-        }
-
-        input::placeholder,
-        textarea::placeholder {
-            color: rgba(255, 255, 255, 0.45);
-        }
-
-        .helper {
-            font-size: 12px;
-            color: var(--faint);
-            margin-top: 8px;
-        }
-
-        /* Sections */
-        section {
-            padding: 56px 0;
-        }
-
-        .section-head {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .section-head h2 {
-            margin: 0;
-            font-size: 26px;
-            letter-spacing: -0.35px;
-        }
-
-        .section-head p {
-            margin: 6px 0 0;
-            color: var(--muted);
-            max-width: 70ch;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            transition: transform .15s ease, background .15s ease, border-color .15s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.07);
-        }
-
-        .card-top {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
-            background: rgba(59, 130, 246, 0.18);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 0 0 auto;
-        }
-
-        .card h3 {
-            margin: 0;
-            font-size: 16px;
-            letter-spacing: -0.2px;
-        }
-
-        .card p {
-            margin: 6px 0 0;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .inline-chips {
-            margin-top: 12px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .chip {
-            padding: 8px 10px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 999px;
-        }
-
-        /* How it works */
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-        }
-
-        .step-num {
-            font-weight: 800;
-            font-size: 12px;
-            letter-spacing: 0.6px;
-            color: rgba(96, 165, 250, 0.95);
-            text-transform: uppercase;
-        }
-
-        /* Coverage */
-        .coverage {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            align-items: stretch;
-        }
-
-        .map {
-            min-height: 320px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            background:
-                radial-gradient(600px 320px at 30% 30%, rgba(59, 130, 246, 0.20), transparent 55%),
-                radial-gradient(520px 280px at 70% 60%, rgba(34, 197, 94, 0.12), transparent 55%),
-                rgba(255, 255, 255, 0.04);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted);
-            text-align: center;
-            padding: 20px;
-        }
-
-        .lanes ul {
-            margin: 10px 0 0;
-            padding-left: 18px;
-            color: var(--muted);
-        }
-
-        .lanes li {
-            margin: 6px 0;
-        }
-
-        /* Testimonials */
-        .quote {
-            font-size: 13px;
-            color: var(--muted);
-            margin-top: 8px;
-        }
-
-        .byline {
-            margin-top: 10px;
-            font-size: 12px;
-            color: var(--faint);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
-        }
-
-        .stat {
-            padding: 12px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 16px;
-            letter-spacing: -0.2px;
-        }
-
-        .stat span {
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        /* CTA band */
-        .cta-band {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(34, 197, 94, 0.10));
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: var(--radius);
-            padding: 18px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            box-shadow: var(--shadow);
-        }
-
-        form .row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        form .row-1 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        textarea {
-            min-height: 92px;
-            resize: vertical;
-        }
-
-        /* FAQ */
-        .faq {
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .faq-item {
-            border-top: 1px solid var(--border);
-        }
-
-        .faq-item:first-child {
-            border-top: none;
-        }
-
-        .faq-q {
-            width: 100%;
-            text-align: left;
-            background: transparent;
-            border: 0;
-            color: var(--text);
-            padding: 14px 16px;
-            font-size: 14px;
-            font-weight: 750;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-        }
-
-        .faq-a {
-            padding: 0 16px 14px;
-            color: var(--muted);
-            font-size: 13px;
-            display: none;
-        }
-
-        .faq-item[open] .faq-a {
-            display: block;
-        }
-
-        .chev {
-            opacity: .75;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 34px 0 86px;
-            /* leave room for mobile sticky bar */
-            color: var(--muted);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .footer-grid h4 {
-            margin: 0 0 10px;
-            color: var(--text);
-            font-size: 14px;
-        }
-
-        .footer-grid a {
-            display: block;
-            padding: 6px 0;
-            color: var(--muted);
-        }
-
-        .footer-grid a:hover {
-            color: var(--text);
-        }
-
-        .legal {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-            border-top: 1px solid var(--border);
-            padding-top: 14px;
-            color: var(--faint);
-            font-size: 12px;
-        }
-
-        /* Mobile sticky CTA */
-        .sticky-cta {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(11, 18, 32, 0.85);
-            border-top: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-            display: none;
-            z-index: 60;
-        }
-
-        .sticky-cta .wrap {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            max-width: var(--max);
-            margin: 0 auto;
-        }
-
-        /* Responsive */
-        @media (max-width: 980px) {
-            nav ul {
-                display: none;
-            }
-
-            .hamburger {
-                display: inline-flex;
-            }
-
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .grid-3 {
-                grid-template-columns: 1fr;
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-
-            .steps {
-                grid-template-columns: 1fr;
-            }
-
-            .coverage {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-band {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .phone {
-                display: none;
-            }
-
-            /* keep click-to-call in sticky bar */
-            .sticky-cta {
-                display: block;
-            }
-
-            header .btn-secondary {
-                display: none;
-            }
-
-            /* Track via hero + menu */
-        }
-
-        @media (max-width: 560px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            form .row {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Reflect Logistics — nationwide freight across all 50 states. LTL, FTL, reefer, expedited, last-mile, warehousing, cross-dock." />
+  <title>Reflect Logistics | Nationwide Freight Across All 50 States</title>
+
+  <style>
+    :root{
+      /* Brand */
+      --navy: #0B1220;
+      --primary: #2563EB;
+      --primary-2: #1D4ED8;
+      --accent: #F59E0B;
+
+      /* Neutrals */
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --surface-2: #F2F5FB;
+      --text: #0B1220;
+      --muted: rgba(11,18,32,0.70);
+      --faint: rgba(11,18,32,0.55);
+      --border: rgba(15,23,42,0.12);
+
+      --radius: 16px;
+      --radius-sm: 12px;
+      --max: 1160px;
+
+      --shadow-sm: 0 8px 24px rgba(11,18,32,0.08);
+      --shadow-md: 0 16px 44px rgba(11,18,32,0.12);
+      --ring: 0 0 0 4px rgba(37,99,235,0.18);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(900px 420px at 15% 0%, rgba(37,99,235,0.10), transparent 60%),
+                  radial-gradient(820px 420px at 85% 10%, rgba(245,158,11,0.10), transparent 55%),
+                  var(--bg);
+      line-height:1.35;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width: var(--max); margin:0 auto; padding:0 20px; }
+
+    /* a11y */
+    :focus-visible{ outline: none; box-shadow: var(--ring); border-radius: 10px; }
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      *{ transition:none !important; animation:none !important; }
+    }
+
+    /* Utility top bar */
+    .topbar{
+      background: rgba(11,18,32,0.92);
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 10px 0;
+      gap: 14px;
+    }
+    .topbar .left, .topbar .right{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    }
+    .topbar a{ color: rgba(255,255,255,0.92); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.86);
+      white-space:nowrap;
+    }
+    .dot{ width:8px; height:8px; border-radius:999px; background: #22C55E; box-shadow: 0 0 0 4px rgba(34,197,94,0.20); }
+
+    /* Header */
+    header{
+      position: sticky; top:0; z-index: 50;
+      background: rgba(247,249,252,0.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      height: 76px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+    .logo{
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(37,99,235,1), rgba(245,158,11,0.95));
+      box-shadow: 0 12px 26px rgba(37,99,235,0.20);
+    }
+    nav ul{
+      display:flex; gap:18px;
+      list-style:none; margin:0; padding:0;
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--muted);
+    }
+    nav a{ padding: 10px 8px; border-radius: 10px; }
+    nav a:hover{ background: rgba(37,99,235,0.06); color: var(--text); }
+
+    .nav-right{ display:flex; align-items:center; gap:10px; }
+    .phone{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      font-weight: 750;
+      font-size: 14px;
+    }
+    .phone span{ color: var(--muted); font-weight: 700; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      font-size: 14px;
+      cursor:pointer;
+      transition: transform .15s ease, filter .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+      white-space: nowrap;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      background: linear-gradient(180deg, var(--primary), var(--primary-2));
+      color: #fff;
+      box-shadow: 0 16px 34px rgba(37,99,235,0.22);
+    }
+    .btn-primary:hover{ filter: brightness(1.03); }
+    .btn-secondary{
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-secondary:hover{ background: rgba(37,99,235,0.05); border-color: rgba(37,99,235,0.25); }
+
+    .btn-ghost{
+      background: transparent;
+      border-color: var(--border);
+      color: var(--muted);
+    }
+    .btn-ghost:hover{ background: rgba(11,18,32,0.04); color: var(--text); }
+
+    .hamburger{ display:none; }
+    .mobile-drawer{
+      display:none;
+      border-top: 1px solid var(--border);
+      padding: 14px 0 18px;
+    }
+    .mobile-drawer a{
+      display:block; padding: 10px 12px; border-radius: 12px;
+      color: var(--muted); font-weight: 650;
+    }
+    .mobile-drawer a:hover{ background: rgba(37,99,235,0.06); color: var(--text); }
+
+    /* Hero */
+    .hero{ padding: 44px 0 18px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(11,18,32,0.72);
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 999px;
+      width: fit-content;
+      box-shadow: var(--shadow-sm);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(34px, 4.2vw, 54px);
+      line-height: 1.04;
+      letter-spacing: -0.8px;
+    }
+    .lead{
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+    }
+    .hero-actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin: 18px 0 14px;
+    }
+    .trust-row{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .badge{
+      font-size: 12px;
+      color: rgba(11,18,32,0.70);
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 999px;
+    }
+    .proof{
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    /* Right hero panel with media + tabs */
+    .hero-panel{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+      display:flex;
+      flex-direction: column;
+      min-height: 420px;
+    }
+    .media{
+      position: relative;
+      height: 190px;
+      background:
+        linear-gradient(120deg, rgba(11,18,32,0.45), rgba(11,18,32,0.10)),
+        url("https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1400&q=60") center/cover no-repeat;
+    }
+    .media::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(500px 180px at 20% 20%, rgba(37,99,235,0.35), transparent 60%);
+      pointer-events:none;
+    }
+    .media-inner{
+      position:absolute; inset:0;
+      padding: 16px;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      color: rgba(255,255,255,0.92);
+    }
+    .media-title{
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing:-0.2px;
+      margin:0;
+    }
+    .media-sub{
+      margin:6px 0 0;
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .panel-body{ padding: 14px; }
+    .tabs{
+      display:flex; gap:8px;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface-2);
+    }
+    .tab{
+      flex:1;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 10px 10px;
+      background: transparent;
+      cursor:pointer;
+      font-weight: 850;
+      font-size: 13px;
+      color: var(--muted);
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .tab[aria-selected="true"]{
+      background: var(--surface);
+      border-color: rgba(37,99,235,0.18);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tabpanels{ margin-top: 10px; }
+    .tabpanel[hidden]{ display:none; }
+
+    .field{ display:grid; gap:10px; margin-top: 10px; }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    input, select, textarea{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-size: 14px;
+      outline:none;
+    }
+    textarea{ min-height: 92px; resize: vertical; }
+    input::placeholder, textarea::placeholder{ color: rgba(11,18,32,0.45); }
+
+    .helper{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--faint);
+    }
+
+    /* Logos strip + KPI strip */
+    .strip{
+      margin-top: 18px;
+      padding: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .logos{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: rgba(11,18,32,0.45);
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    .logo-box{
+      padding: 8px 10px;
+      border: 1px dashed rgba(11,18,32,0.18);
+      border-radius: 12px;
+      background: rgba(11,18,32,0.02);
+    }
+    .kpis{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 10px;
+    }
+    .kpi{
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(37,99,235,0.03);
+      padding: 12px;
+    }
+    .kpi strong{ display:block; font-size: 15px; letter-spacing:-0.2px; }
+    .kpi span{ display:block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+
+    /* Sections */
+    section{ padding: 58px 0; }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size: 28px;
+      letter-spacing: -0.35px;
+    }
+    .section-head p{ margin: 6px 0 0; color: var(--muted); max-width: 74ch; }
+
+    .grid-3{ display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .grid-2{ display:grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(37,99,235,0.22);
+    }
+    .card-top{ display:flex; gap:12px; align-items:flex-start; }
+    .icon{
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      background: rgba(37,99,235,0.10);
+      border: 1px solid rgba(37,99,235,0.18);
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto;
+      font-size: 18px;
+    }
+    .card h3{ margin:0; font-size: 16px; letter-spacing:-0.15px; }
+    .card p{ margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+
+    .inline-chips{
+      margin-top: 12px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .chip{
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 999px;
+    }
+
+    /* Steps */
+    .steps{ display:grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .step-num{
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing: 0.7px;
+      color: rgba(37,99,235,0.95);
+      text-transform: uppercase;
+    }
+
+    /* Coverage */
+    .coverage{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
+    .map{
+      min-height: 320px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(600px 320px at 30% 30%, rgba(37,99,235,0.12), transparent 55%),
+        radial-gradient(520px 280px at 70% 60%, rgba(245,158,11,0.12), transparent 55%),
+        var(--surface);
+      display:flex; align-items:center; justify-content:center;
+      color: var(--muted);
+      text-align:center;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .panel{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 18px;
+    }
+    .panel h3{ margin:0 0 6px; font-size: 16px; letter-spacing:-0.2px; }
+    .panel p{ margin:0 0 10px; color: var(--muted); font-size: 13px; }
+    .lanes ul{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    .lanes li{ margin: 6px 0; }
+
+    /* Testimonials + stats */
+    .quote{ font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .byline{ margin-top: 10px; font-size: 12px; color: var(--faint); }
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .stat{
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .stat strong{ display:block; font-size: 16px; letter-spacing:-0.2px; }
+    .stat span{ color: var(--muted); font-size: 12px; }
+
+    /* CTA band */
+    .cta-band{
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(245,158,11,0.10));
+      border: 1px solid rgba(15,23,42,0.12);
+      border-radius: var(--radius);
+      padding: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      box-shadow: var(--shadow-md);
+    }
+    .form-actions{ display:flex; gap:10px; margin-top: 10px; flex-wrap: wrap; }
+
+    /* FAQ */
+    .faq{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-item{ border-top: 1px solid var(--border); }
+    .faq-item:first-child{ border-top:none; }
+    .faq-q{
+      width:100%;
+      text-align:left;
+      background: transparent;
+      border:0;
+      color: var(--text);
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 850;
+      display:flex; align-items:center; justify-content:space-between;
+      cursor:pointer;
+    }
+    .faq-a{
+      padding: 0 16px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      display:none;
+    }
+    .faq-item[open] .faq-a{ display:block; }
+    .chev{ opacity:.6; }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 34px 0 86px;
+      color: var(--muted);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .footer-grid h4{ margin:0 0 10px; color: var(--text); font-size: 14px; }
+    .footer-grid a{ display:block; padding: 6px 0; color: var(--muted); }
+    .footer-grid a:hover{ color: var(--text); }
+    .legal{
+      display:flex; justify-content:space-between; gap: 10px; flex-wrap:wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      color: var(--faint);
+      font-size: 12px;
+    }
+
+    /* Mobile sticky CTA */
+    .sticky-cta{
+      position: fixed;
+      left:0; right:0; bottom:0;
+      background: rgba(255,255,255,0.92);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      display:none;
+      z-index: 60;
+    }
+    .sticky-cta .wrap{
+      display:grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      max-width: var(--max); margin: 0 auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      nav ul{ display:none; }
+      .hamburger{ display:inline-flex; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .steps{ grid-template-columns: 1fr; }
+      .coverage{ grid-template-columns: 1fr; }
+      .cta-band{ grid-template-columns: 1fr; }
+      .footer-grid{ grid-template-columns: 1fr 1fr; }
+      .phone{ display:none; }
+      .sticky-cta{ display:block; }
+    }
+    @media (max-width: 560px){
+      .footer-grid{ grid-template-columns: 1fr; }
+      .row{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <div class="container nav" aria-label="Primary">
-            <a class="brand" href="#top" aria-label="Reflect Logistics home">
-                <div class="logo" aria-hidden="true"></div>
-                <div>Reflect Logistics</div>
-            </a>
+<!-- Utility bar -->
+<div class="topbar" aria-label="Utility bar">
+  <div class="container">
+    <div class="row">
+      <div class="left">
+        <span class="pill"><span class="dot" aria-hidden="true"></span> All 50 states coverage</span>
+        <span>Email: <a href="mailto:info@reflectlogistic.com">info@reflectlogistic.com</a></span>
+      </div>
+      <div class="right">
+        <span>Call: <a href="tel:6674154193">667-415-4193</a></span>
+        <a class="pill" href="#quote" style="text-decoration:none;">Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <nav aria-label="Site">
-                <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#how">How it Works</a></li>
-                    <li><a href="#coverage">Coverage</a></li>
-                    <li><a href="#why">Why Reflect</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-            </nav>
+<header>
+  <div class="container nav" aria-label="Primary">
+    <a class="brand" href="#top" aria-label="Reflect Logistics home">
+      <div class="logo" aria-hidden="true"></div>
+      <div>Reflect Logistics</div>
+    </a>
 
-            <div class="nav-right">
-                <a class="phone" href="tel:6674154193" aria-label="Call 667-415-4193">
-                    <span>Call</span> 667-415-4193
-                </a>
+    <nav aria-label="Site">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">How it Works</a></li>
+        <li><a href="#coverage">Coverage</a></li>
+        <li><a href="#why">Why Reflect</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
 
-                <button class="btn btn-ghost hamburger" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
-                    Menu
-                </button>
+    <div class="nav-right">
+      <a class="phone" href="tel:6674154193" aria-label="Call 667-415-4193"><span>Call</span> 667-415-4193</a>
+      <button class="btn btn-ghost hamburger" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+      <a class="btn btn-secondary" href="#track">Track Shipment</a>
+      <a class="btn btn-primary" href="#quote">Get a Quote</a>
+    </div>
+  </div>
 
-                <a class="btn btn-secondary" href="#track">Track Shipment</a>
-                <a class="btn btn-primary" href="#quote">Get a Quote</a>
-            </div>
+  <div class="container mobile-drawer" id="mobileMenu" hidden>
+    <a href="#services">Services</a>
+    <a href="#how">How it Works</a>
+    <a href="#coverage">Coverage</a>
+    <a href="#why">Why Reflect</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#faq">FAQ</a>
+    <a href="#track">Track Shipment</a>
+    <a href="#quote">Get a Quote</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="kicker">Nationwide freight across all 50 states</div>
+        <h1>Freight that moves like clockwork—across all 50 states.</h1>
+        <p class="lead">
+          Ship LTL, FTL, reefer, expedited, and last-mile with a team that prioritizes visibility, safety, and on-time execution.
+          Get a fast quote or track a load in seconds.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#quote">Get a Quote</a>
+          <a class="btn btn-secondary" href="#track">Track Shipment</a>
         </div>
 
-        <div class="container mobile-drawer" id="mobileMenu" hidden>
-            <a href="#services">Services</a>
-            <a href="#how">How it Works</a>
-            <a href="#coverage">Coverage</a>
-            <a href="#why">Why Reflect</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#faq">FAQ</a>
-            <a href="#track">Track Shipment</a>
-            <a href="#quote">Get a Quote</a>
-            <a href="mailto:info@reflectlogistic.com">Email: info@reflectlogistic.com</a>
+        <div class="trust-row" aria-label="Trust badges">
+          <span class="badge">Insured Carrier Network</span>
+          <span class="badge">Safety-First Operations</span>
+          <span class="badge">Real-time Updates</span>
+          <span class="badge">US Nationwide Coverage</span>
         </div>
-    </header>
 
-    <main id="top">
-        <!-- HERO -->
-        <section class="hero">
-            <div class="container hero-grid">
-                <div>
-                    <div class="kicker"><span class="dot" aria-hidden="true"></span> Nationwide freight across all 50
-                        states</div>
-                    <h1>Freight that moves like clockwork—across all 50 states.</h1>
-                    <p class="lead">
-                        Ship LTL, FTL, reefer, expedited, and last-mile with a team that prioritizes visibility, safety,
-                        and on-time execution.
-                        Get a fast quote or track a load in seconds.
-                    </p>
+        <p class="proof">
+          Trusted by shippers who value clear communication and consistent delivery—<strong>[STAT] on-time performance</strong> and <strong>[STAT] shipments managed</strong>.
+        </p>
 
-                    <div class="hero-actions">
-                        <a class="btn btn-primary" href="#quote">Get a Quote</a>
-                        <a class="btn btn-secondary" href="#track">Track Shipment</a>
-                    </div>
+        <!-- Logos + KPIs (template-style credibility) -->
+        <div class="strip" aria-label="Social proof strip">
+          <div class="logos" aria-label="Partner logos">
+            <span class="logo-box">[SHIPPER LOGO]</span>
+            <span class="logo-box">[DISTRIBUTOR]</span>
+            <span class="logo-box">[MANUFACTURING]</span>
+            <span class="logo-box">[RETAIL]</span>
+            <span class="logo-box">[3PL]</span>
+          </div>
 
-                    <div class="badges" aria-label="Trust badges">
-                        <span class="badge">Insured Carrier Network</span>
-                        <span class="badge">Safety-First Operations</span>
-                        <span class="badge">Real-time Updates</span>
-                        <span class="badge">US Nationwide Coverage</span>
-                    </div>
-
-                    <p class="proof">
-                        Trusted by shippers who value clear communication and consistent delivery—<strong>[STAT] on-time
-                            performance</strong> and <strong>[STAT] shipments managed</strong>.
-                        <span style="display:block; margin-top:6px;">Same-day callback. Prefer to talk now? Call <a
-                                href="tel:6674154193" style="text-decoration:underline;">667-415-4193</a>.</span>
-                    </p>
-                </div>
-
-                <!-- Track card -->
-                <div class="panel" id="track">
-                    <h3>Track Shipment</h3>
-                    <p>Enter your Tracking ID to check the latest status.</p>
-
-                    <div class="field" role="group" aria-label="Tracking input group">
-                        <input type="text" name="tracking" placeholder="Enter Tracking ID" aria-label="Tracking ID" />
-                        <button class="btn btn-primary" type="button">Track</button>
-                    </div>
-
-                    <div class="helper">
-                        If you don’t have a Tracking ID, request an update at
-                        <a href="mailto:info@reflectlogistic.com"
-                            style="text-decoration:underline;">info@reflectlogistic.com</a>.
-                    </div>
-
-                    <div class="inline-chips" style="margin-top:14px;">
-                        <span class="chip">LTL</span><span class="chip">FTL</span><span class="chip">Reefer</span>
-                        <span class="chip">Expedited</span><span class="chip">Last-mile</span><span
-                            class="chip">Warehousing</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SERVICES -->
-        <section id="services">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <h2>Services built for real-world freight</h2>
-                        <p>Flexible options, one accountable partner.</p>
-                    </div>
-                </div>
-
-                <div class="grid-3" role="list" aria-label="Service cards">
-                    <div class="card" role="listitem">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">🚚</div>
-                            <div>
-                                <h3>LTL (Less-Than-Truckload)</h3>
-                                <p>Reduce cost without losing schedule control.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" role="listitem">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">🛻</div>
-                            <div>
-                                <h3>FTL (Full Truckload)</h3>
-                                <p>Dedicated capacity for time-critical lanes.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" role="listitem">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">⚡</div>
-                            <div>
-                                <h3>Expedited</h3>
-                                <p>When “tomorrow” is the only acceptable answer.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" role="listitem">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">❄️</div>
-                            <div>
-                                <h3>Reefer (Temperature-Controlled)</h3>
-                                <p>Cold chain handled with care and documentation.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" role="listitem">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">🏢</div>
-                            <div>
-                                <h3>Warehousing</h3>
-                                <p>Short- or long-term storage that supports your flow.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card" role="listitem">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">📦</div>
-                            <div>
-                                <h3>Last-mile / Final Delivery</h3>
-                                <p>A clean handoff from dock to doorstep.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="inline-chips" aria-label="Additional services">
-                    <span class="chip">Also available: Cross-dock</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- HOW IT WORKS -->
-        <section id="how">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <h2>How it works</h2>
-                        <p>Simple steps. Fewer surprises.</p>
-                    </div>
-                    <a class="btn btn-secondary" href="#quote">Get a Quote</a>
-                </div>
-
-                <div class="steps">
-                    <div class="card">
-                        <div class="step-num">Step 1</div>
-                        <h3>Request</h3>
-                        <p>Send shipment details and priorities (speed, cost, handling).</p>
-                    </div>
-                    <div class="card">
-                        <div class="step-num">Step 2</div>
-                        <h3>Pickup</h3>
-                        <p>We confirm pickup window and documentation.</p>
-                    </div>
-                    <div class="card">
-                        <div class="step-num">Step 3</div>
-                        <h3>In transit</h3>
-                        <p>Clear status updates and exception handling when needed.</p>
-                    </div>
-                    <div class="card">
-                        <div class="step-num">Step 4</div>
-                        <h3>Delivered</h3>
-                        <p>Proof of delivery and close-out details shared promptly.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- COVERAGE -->
-        <section id="coverage">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <h2>Nationwide coverage—All 50 states</h2>
-                        <p>Common lanes, uncommon consistency.</p>
-                    </div>
-                </div>
-
-                <div class="coverage">
-                    <div class="map" aria-label="US coverage map placeholder">
-                        <div>
-                            <strong style="display:block; font-size:16px; color: var(--text);">US Map
-                                Placeholder</strong>
-                            <div style="margin-top:8px; color: var(--muted); font-size:13px;">
-                                Replace with an optimized SVG map highlighting nationwide coverage.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel lanes">
-                        <h3>Primary lanes</h3>
-                        <p>We support recurring lanes and spot coverage based on your pickup/delivery requirements.</p>
-                        <ul>
-                            <li>Midwest ↔ Southeast</li>
-                            <li>Northeast ↔ Mid-Atlantic</li>
-                            <li>Texas ↔ West Coast</li>
-                            <li>Nationwide spot coverage</li>
-                        </ul>
-                        <p class="helper" style="margin-top:10px;">
-                            Need a custom lane? Share your ZIPs and constraints in the quote form.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- WHY CHOOSE US -->
-        <section id="why">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <h2>Why Reflect Logistics</h2>
-                        <p>Enterprise-grade execution with a human point of contact.</p>
-                    </div>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">🧭</div>
-                            <div>
-                                <h3>Reliability you can plan around</h3>
-                                <p>Clear ETAs, proactive exception management.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">👁️</div>
-                            <div>
-                                <h3>Visibility without the noise</h3>
-                                <p>Meaningful updates at the moments that matter.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">🧾</div>
-                            <div>
-                                <h3>Pricing that stays explainable</h3>
-                                <p>Transparent quote inputs and scope clarity.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">🛡️</div>
-                            <div>
-                                <h3>Safety & handling standards</h3>
-                                <p>Carrier compliance and shipment protection practices.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-top">
-                            <div class="icon" aria-hidden="true">📞</div>
-                            <div>
-                                <h3>Responsive support</h3>
-                                <p>One team, reachable by phone when it’s urgent.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TESTIMONIALS -->
-        <section id="testimonials">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <h2>What shippers say</h2>
-                        <p>The difference is consistency and communication.</p>
-                    </div>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card">
-                        <h3>“Less chasing, more clarity.”</h3>
-                        <p class="quote">“Reflect Logistics kept us updated without us chasing. Pickup happened when
-                            promised and delivery was clean.”</p>
-                        <div class="byline">— [Name], [Title], [Company]</div>
-                    </div>
-                    <div class="card">
-                        <h3>“Expedited done right.”</h3>
-                        <p class="quote">“Expedited shipment went smoothly—clear expectations and fast coordination.”
-                        </p>
-                        <div class="byline">— [Name], [Title], [Company]</div>
-                    </div>
-                    <div class="card">
-                        <h3>“Consistent partner.”</h3>
-                        <p class="quote">“Solid partner for LTL and FTL. They’re responsive, and issues get handled
-                            quickly.”</p>
-                        <div class="byline">— [Name], [Title], [Company]</div>
-                    </div>
-                </div>
-
-                <div class="stats" aria-label="Quick stats">
-                    <div class="stat"><strong>[STAT]%</strong><span>On-time performance</span></div>
-                    <div class="stat"><strong>[STAT]+</strong><span>Monthly shipments</span></div>
-                    <div class="stat"><strong>[STAT]</strong><span>Avg. quote turnaround (mins)</span></div>
-                    <div class="stat"><strong>All 50 states</strong><span>Coverage</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA + QUOTE FORM -->
-        <section id="quote">
-            <div class="container">
-                <div class="cta-band" role="region" aria-label="Get a Quote">
-                    <div>
-                        <h2 style="margin:0; font-size:24px; letter-spacing:-0.3px;">Get a fast, accurate freight quote
-                        </h2>
-                        <p style="margin:8px 0 0; color: var(--muted);">
-                            Share ZIPs and shipment type—our team will respond with options.
-                        </p>
-                        <p class="helper" style="margin-top:10px;">
-                            Prefer to talk now? Call <a href="tel:6674154193"
-                                style="text-decoration:underline;">667-415-4193</a>
-                            or email <a href="mailto:info@reflectlogistic.com"
-                                style="text-decoration:underline;">info@reflectlogistic.com</a>.
-                        </p>
-                    </div>
-
-                    <form aria-label="Quote form">
-                        <div class="row">
-                            <input type="text" name="pickupZip" placeholder="Pickup ZIP" aria-label="Pickup ZIP" />
-                            <input type="text" name="deliveryZip" placeholder="Delivery ZIP"
-                                aria-label="Delivery ZIP" />
-                        </div>
-
-                        <div class="row">
-                            <select name="shipmentType" aria-label="Shipment type">
-                                <option value="">Shipment type</option>
-                                <option>LTL</option>
-                                <option>FTL</option>
-                                <option>Reefer</option>
-                                <option>Expedited</option>
-                                <option>Last-mile</option>
-                                <option>Warehousing</option>
-                                <option>Cross-dock</option>
-                            </select>
-                            <input type="text" name="contactName" placeholder="Contact name"
-                                aria-label="Contact name" />
-                        </div>
-
-                        <div class="row">
-                            <input type="text" name="contact" placeholder="Email or phone"
-                                aria-label="Email or phone" />
-                            <select name="priority" aria-label="Priority">
-                                <option value="">What matters most?</option>
-                                <option>Speed</option>
-                                <option>Cost</option>
-                                <option>Handling</option>
-                                <option>Appointment delivery</option>
-                            </select>
-                        </div>
-
-                        <div class="row-1">
-                            <textarea name="notes"
-                                placeholder="Optional notes (weight, pallets, dimensions, special handling, deadlines)"
-                                aria-label="Notes"></textarea>
-                        </div>
-
-                        <div class="form-actions">
-                            <button class="btn btn-primary" type="submit">Get a Quote</button>
-                            <a class="btn btn-secondary" href="#track">Track Shipment</a>
-                        </div>
-
-                        <div class="helper">No spam. We’ll only use this to respond to your request.</div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section id="faq">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <h2>FAQ</h2>
-                        <p>Quick answers for quoting, tracking, and service coverage.</p>
-                    </div>
-                </div>
-
-                <div class="faq" role="region" aria-label="Frequently asked questions">
-                    <div class="faq-item" open>
-                        <button class="faq-q" type="button" aria-expanded="true">
-                            What information do you need to quote a shipment?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            Pickup ZIP, delivery ZIP, shipment type (LTL/FTL/etc.), and basic details like
-                            weight/dimensions or pallet count if available.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            Do you cover all 50 states?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            Yes—Reflect Logistics supports shipping across all 50 states. Availability may vary by
-                            service and lane.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            Can you handle temperature-controlled (reefer) freight?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            Yes. Share required temperature range and any handling notes in your request.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            How do tracking updates work?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            Use the Tracking ID field to check status. If you prefer, our team can provide updates by
-                            email or phone.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            Do you offer warehousing and cross-dock?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            Yes. Tell us location, timing, and throughput requirements, and we’ll propose the right
-                            setup.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            Can you support expedited and last-mile delivery?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            Yes. For expedited, include pickup deadline and delivery deadline. For last-mile, include
-                            delivery constraints (appointment, liftgate, etc.).
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            What’s your process if something changes in transit?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            We surface exceptions quickly and coordinate next steps (re-route, reschedule, or alternate
-                            options) with your approval.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            How do I contact support?
-                            <span class="chev">▾</span>
-                        </button>
-                        <div class="faq-a">
-                            Call <a href="tel:6674154193" style="text-decoration:underline;">667-415-4193</a> or email
-                            <a href="mailto:info@reflectlogistic.com"
-                                style="text-decoration:underline;">info@reflectlogistic.com</a>.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h4>Reflect Logistics</h4>
-                    <div style="color: var(--muted); font-size:13px;">
-                        Premium freight services across all 50 states. LTL, FTL, last-mile, warehousing, cross-dock,
-                        reefer, expedited.
-                    </div>
-                </div>
-
-                <div>
-                    <h4>Contact</h4>
-                    <a href="tel:6674154193">667-415-4193</a>
-                    <a href="mailto:info@reflectlogistic.com">info@reflectlogistic.com</a>
-                </div>
-
-                <div>
-                    <h4>Services</h4>
-                    <a href="#services">LTL</a>
-                    <a href="#services">FTL</a>
-                    <a href="#services">Last-mile</a>
-                    <a href="#services">Warehousing</a>
-                    <a href="#services">Cross-dock</a>
-                    <a href="#services">Reefer</a>
-                    <a href="#services">Expedited</a>
-                </div>
-
-                <div>
-                    <h4>Quick links</h4>
-                    <a href="#quote">Get a Quote</a>
-                    <a href="#track">Track Shipment</a>
-                    <a href="#coverage">Coverage</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#privacy">Privacy</a>
-                    <a href="#terms">Terms</a>
-                </div>
-            </div>
-
-            <div class="legal">
-                <div>© <span id="year"></span> Reflect Logistics. All rights reserved.</div>
-                <div><a id="privacy" href="#" style="text-decoration:underline;">Privacy</a> · <a id="terms" href="#"
-                        style="text-decoration:underline;">Terms</a></div>
-            </div>
+          <div class="kpis" aria-label="Key performance indicators">
+            <div class="kpi"><strong>[STAT]%</strong><span>On-time performance</span></div>
+            <div class="kpi"><strong>[STAT]</strong><span>Avg. quote turnaround</span></div>
+            <div class="kpi"><strong>[STAT]+</strong><span>Monthly shipments</span></div>
+            <div class="kpi"><strong>All 50 states</strong><span>Coverage</span></div>
+          </div>
         </div>
-    </footer>
+      </div>
 
-    <!-- Mobile sticky bottom CTA -->
-    <div class="sticky-cta" role="region" aria-label="Quick actions">
-        <div class="wrap">
-            <a class="btn btn-secondary" href="tel:6674154193" aria-label="Call 667-415-4193">Call</a>
-            <a class="btn btn-primary" href="#quote">Get a Quote</a>
+      <!-- Right: Premium panel with media + tabs -->
+      <aside class="hero-panel" id="track" aria-label="Quote and tracking widget">
+        <div class="media" role="img" aria-label="Logistics hero image">
+          <div class="media-inner">
+            <p class="media-title">Fast quoting. Clear tracking.</p>
+            <p class="media-sub">Choose an option below—built for speed, not friction.</p>
+          </div>
         </div>
+
+        <div class="panel-body">
+          <div class="tabs" role="tablist" aria-label="Quote or track">
+            <button class="tab" id="tabQuote" role="tab" aria-selected="true" aria-controls="panelQuote">Get a Quote</button>
+            <button class="tab" id="tabTrack" role="tab" aria-selected="false" aria-controls="panelTrack">Track Shipment</button>
+          </div>
+
+          <div class="tabpanels">
+            <!-- Quote tab -->
+            <div class="tabpanel" id="panelQuote" role="tabpanel" aria-labelledby="tabQuote">
+              <form aria-label="Mini quote form">
+                <div class="field">
+                  <div class="row">
+                    <input type="text" name="pickupZipMini" placeholder="Pickup ZIP" aria-label="Pickup ZIP" />
+                    <input type="text" name="deliveryZipMini" placeholder="Delivery ZIP" aria-label="Delivery ZIP" />
+                  </div>
+                  <div class="row">
+                    <select name="shipmentTypeMini" aria-label="Shipment type">
+                      <option value="">Shipment type</option>
+                      <option>LTL</option>
+                      <option>FTL</option>
+                      <option>Reefer</option>
+                      <option>Expedited</option>
+                      <option>Last-mile</option>
+                      <option>Warehousing</option>
+                      <option>Cross-dock</option>
+                    </select>
+                    <input type="text" name="contactMini" placeholder="Email or phone" aria-label="Email or phone" />
+                  </div>
+
+                  <button class="btn btn-primary" type="submit" style="width:100%;">Get a Quote</button>
+
+                  <div class="helper">
+                    Prefer to talk now? Call <a href="tel:6674154193" style="text-decoration:underline;">667-415-4193</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Track tab -->
+            <div class="tabpanel" id="panelTrack" role="tabpanel" aria-labelledby="tabTrack" hidden>
+              <div class="field">
+                <input type="text" name="tracking" placeholder="Enter Tracking ID" aria-label="Tracking ID" />
+                <button class="btn btn-primary" type="button" style="width:100%;">Track</button>
+                <div class="helper">
+                  Need help? Email <a href="mailto:info@reflectlogistic.com" style="text-decoration:underline;">info@reflectlogistic.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="inline-chips" style="margin-top:12px;">
+            <span class="chip">LTL</span><span class="chip">FTL</span><span class="chip">Reefer</span>
+            <span class="chip">Expedited</span><span class="chip">Last-mile</span><span class="chip">Warehousing</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Services built for real-world freight</h2>
+          <p>Flexible options, one accountable partner.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" role="list" aria-label="Service cards">
+        <div class="card" role="listitem">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">🚚</div>
+            <div>
+              <h3>LTL (Less-Than-Truckload)</h3>
+              <p>Reduce cost without losing schedule control.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="listitem">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">🛻</div>
+            <div>
+              <h3>FTL (Full Truckload)</h3>
+              <p>Dedicated capacity for time-critical lanes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="listitem">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <div>
+              <h3>Expedited</h3>
+              <p>When “tomorrow” is the only acceptable answer.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="listitem">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">❄️</div>
+            <div>
+              <h3>Reefer (Temperature-Controlled)</h3>
+              <p>Cold chain handled with care and documentation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="listitem">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">🏢</div>
+            <div>
+              <h3>Warehousing</h3>
+              <p>Short- or long-term storage that supports your flow.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" role="listitem">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">📦</div>
+            <div>
+              <h3>Last-mile / Final Delivery</h3>
+              <p>A clean handoff from dock to doorstep.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="inline-chips" aria-label="Additional services">
+        <span class="chip">Also available: Cross-dock</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>How it works</h2>
+          <p>Simple steps. Fewer surprises.</p>
+        </div>
+        <a class="btn btn-secondary" href="#quote">Get a Quote</a>
+      </div>
+
+      <div class="steps">
+        <div class="card">
+          <div class="step-num">Step 1</div>
+          <h3>Request</h3>
+          <p>Send shipment details and priorities (speed, cost, handling).</p>
+        </div>
+        <div class="card">
+          <div class="step-num">Step 2</div>
+          <h3>Pickup</h3>
+          <p>We confirm pickup window and documentation.</p>
+        </div>
+        <div class="card">
+          <div class="step-num">Step 3</div>
+          <h3>In transit</h3>
+          <p>Clear status updates and exception handling when needed.</p>
+        </div>
+        <div class="card">
+          <div class="step-num">Step 4</div>
+          <h3>Delivered</h3>
+          <p>Proof of delivery and close-out details shared promptly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section id="coverage">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Nationwide coverage—All 50 states</h2>
+          <p>Common lanes, uncommon consistency.</p>
+        </div>
+      </div>
+
+      <div class="coverage">
+        <div class="map" aria-label="US coverage map placeholder">
+          <div>
+            <strong style="display:block; font-size:16px; color: var(--text);">US Map Placeholder</strong>
+            <div style="margin-top:8px; color: var(--muted); font-size:13px;">
+              Replace with an optimized SVG map highlighting nationwide coverage.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel lanes">
+          <h3>Primary lanes</h3>
+          <p>We support recurring lanes and spot coverage based on your pickup/delivery requirements.</p>
+          <ul>
+            <li>Midwest ↔ Southeast</li>
+            <li>Northeast ↔ Mid-Atlantic</li>
+            <li>Texas ↔ West Coast</li>
+            <li>Nationwide spot coverage</li>
+          </ul>
+          <p class="helper" style="margin-top:10px;">
+            Need a custom lane? Share your ZIPs and constraints in the quote form.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section id="why">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>Why Reflect Logistics</h2>
+          <p>Enterprise-grade execution with a human point of contact.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">🧭</div>
+            <div>
+              <h3>Reliability you can plan around</h3>
+              <p>Clear ETAs, proactive exception management.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">👁️</div>
+            <div>
+              <h3>Visibility without the noise</h3>
+              <p>Meaningful updates at the moments that matter.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">🧾</div>
+            <div>
+              <h3>Pricing that stays explainable</h3>
+              <p>Transparent quote inputs and scope clarity.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">🛡️</div>
+            <div>
+              <h3>Safety & handling standards</h3>
+              <p>Carrier compliance and shipment protection practices.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="icon" aria-hidden="true">📞</div>
+            <div>
+              <h3>Responsive support</h3>
+              <p>One team, reachable by phone when it’s urgent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>What shippers say</h2>
+          <p>The difference is consistency and communication.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>“Less chasing, more clarity.”</h3>
+          <p class="quote">“Reflect Logistics kept us updated without us chasing. Pickup happened when promised and delivery was clean.”</p>
+          <div class="byline">— [Name], [Title], [Company]</div>
+        </div>
+        <div class="card">
+          <h3>“Expedited done right.”</h3>
+          <p class="quote">“Expedited shipment went smoothly—clear expectations and fast coordination.”</p>
+          <div class="byline">— [Name], [Title], [Company]</div>
+        </div>
+        <div class="card">
+          <h3>“Consistent partner.”</h3>
+          <p class="quote">“Solid partner for LTL and FTL. They’re responsive, and issues get handled quickly.”</p>
+          <div class="byline">— [Name], [Title], [Company]</div>
+        </div>
+      </div>
+
+      <div class="stats" aria-label="Quick stats">
+        <div class="stat"><strong>[STAT]%</strong><span>On-time performance</span></div>
+        <div class="stat"><strong>[STAT]+</strong><span>Monthly shipments</span></div>
+        <div class="stat"><strong>[STAT]</strong><span>Avg. quote turnaround (mins)</span></div>
+        <div class="stat"><strong>All 50 states</strong><span>Coverage</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + QUOTE FORM -->
+  <section id="quote">
+    <div class="container">
+      <div class="cta-band" role="region" aria-label="Get a Quote">
+        <div>
+          <h2 style="margin:0; font-size:24px; letter-spacing:-0.3px;">Get a fast, accurate freight quote</h2>
+          <p style="margin:8px 0 0; color: var(--muted);">
+            Share ZIPs and shipment type—our team will respond with options.
+          </p>
+          <p class="helper" style="margin-top:10px;">
+            Prefer to talk now? Call <a href="tel:6674154193" style="text-decoration:underline;">667-415-4193</a>
+            or email <a href="mailto:info@reflectlogistic.com" style="text-decoration:underline;">info@reflectlogistic.com</a>.
+          </p>
+        </div>
+
+        <form aria-label="Quote form" id="quoteForm">
+          <div class="row">
+            <input type="text" name="pickupZip" placeholder="Pickup ZIP" aria-label="Pickup ZIP" />
+            <input type="text" name="deliveryZip" placeholder="Delivery ZIP" aria-label="Delivery ZIP" />
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <select name="shipmentType" aria-label="Shipment type">
+              <option value="">Shipment type</option>
+              <option>LTL</option>
+              <option>FTL</option>
+              <option>Reefer</option>
+              <option>Expedited</option>
+              <option>Last-mile</option>
+              <option>Warehousing</option>
+              <option>Cross-dock</option>
+            </select>
+            <input type="text" name="contactName" placeholder="Contact name" aria-label="Contact name" />
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <input type="text" name="contact" placeholder="Email or phone" aria-label="Email or phone" />
+            <select name="priority" aria-label="Priority">
+              <option value="">What matters most?</option>
+              <option>Speed</option>
+              <option>Cost</option>
+              <option>Handling</option>
+              <option>Appointment delivery</option>
+            </select>
+          </div>
+
+          <div style="margin-top:10px;">
+            <textarea name="notes" placeholder="Optional notes (weight, pallets, dimensions, special handling, deadlines)" aria-label="Notes"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Get a Quote</button>
+            <a class="btn btn-secondary" href="#track">Track Shipment</a>
+          </div>
+
+          <div class="helper">No spam. We’ll only use this to respond to your request.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>FAQ</h2>
+          <p>Quick answers for quoting, tracking, and service coverage.</p>
+        </div>
+      </div>
+
+      <div class="faq" role="region" aria-label="Frequently asked questions">
+        <div class="faq-item" open>
+          <button class="faq-q" type="button" aria-expanded="true">
+            What information do you need to quote a shipment?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            Pickup ZIP, delivery ZIP, shipment type (LTL/FTL/etc.), and basic details like weight/dimensions or pallet count if available.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Do you cover all 50 states?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            Yes—Reflect Logistics supports shipping across all 50 states. Availability may vary by service and lane.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Can you handle temperature-controlled (reefer) freight?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            Yes. Share required temperature range and any handling notes in your request.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How do tracking updates work?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            Use the Tracking ID field to check status. If you prefer, our team can provide updates by email or phone.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Do you offer warehousing and cross-dock?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            Yes. Tell us location, timing, and throughput requirements, and we’ll propose the right setup.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            Can you support expedited and last-mile delivery?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            Yes. For expedited, include pickup deadline and delivery deadline. For last-mile, include delivery constraints (appointment, liftgate, etc.).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            What’s your process if something changes in transit?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            We surface exceptions quickly and coordinate next steps (re-route, reschedule, or alternate options) with your approval.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            How do I contact support?
+            <span class="chev">▾</span>
+          </button>
+          <div class="faq-a">
+            Call <a href="tel:6674154193" style="text-decoration:underline;">667-415-4193</a> or email
+            <a href="mailto:info@reflectlogistic.com" style="text-decoration:underline;">info@reflectlogistic.com</a>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Reflect Logistics</h4>
+        <div style="color: var(--muted); font-size:13px;">
+          Premium freight services across all 50 states. LTL, FTL, last-mile, warehousing, cross-dock, reefer, expedited.
+        </div>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <a href="tel:6674154193">667-415-4193</a>
+        <a href="mailto:info@reflectlogistic.com">info@reflectlogistic.com</a>
+      </div>
+
+      <div>
+        <h4>Services</h4>
+        <a href="#services">LTL</a>
+        <a href="#services">FTL</a>
+        <a href="#services">Last-mile</a>
+        <a href="#services">Warehousing</a>
+        <a href="#services">Cross-dock</a>
+        <a href="#services">Reefer</a>
+        <a href="#services">Expedited</a>
+      </div>
+
+      <div>
+        <h4>Quick links</h4>
+        <a href="#quote">Get a Quote</a>
+        <a href="#track">Track Shipment</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#faq">FAQ</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+      </div>
     </div>
 
-    <script>
-        // Mobile menu toggle
-        const btn = document.getElementById('menuBtn');
-        const menu = document.getElementById('mobileMenu');
-        if (btn && menu) {
-            btn.addEventListener('click', () => {
-                const isOpen = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', String(!isOpen));
-                menu.hidden = isOpen;
-            });
-        }
+    <div class="legal">
+      <div>© <span id="year"></span> Reflect Logistics. All rights reserved.</div>
+      <div><a id="privacy" href="#" style="text-decoration:underline;">Privacy</a> · <a id="terms" href="#" style="text-decoration:underline;">Terms</a></div>
+    </div>
+  </div>
+</footer>
 
-        // FAQ accordion (lightweight)
-        document.querySelectorAll('.faq-item .faq-q').forEach((q) => {
-            q.addEventListener('click', () => {
-                const item = q.parentElement;
-                const isOpen = item.hasAttribute('open');
-                // close others for tight UX
-                document.querySelectorAll('.faq-item[open]').forEach(el => el.removeAttribute('open'));
-                document.querySelectorAll('.faq-q').forEach(el => el.setAttribute('aria-expanded', 'false'));
-                if (!isOpen) {
-                    item.setAttribute('open', '');
-                    q.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
+<!-- Mobile sticky bottom CTA -->
+<div class="sticky-cta" role="region" aria-label="Quick actions">
+  <div class="wrap">
+    <a class="btn btn-secondary" href="tel:6674154193" aria-label="Call 667-415-4193">Call</a>
+    <a class="btn btn-primary" href="#quote">Get a Quote</a>
+  </div>
+</div>
 
-        // Footer year
-        document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+  // Mobile menu toggle (minimal JS)
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  if (btn && menu){
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      menu.hidden = isOpen;
+    });
+  }
 
-        // Prevent form submission demo
-        document.querySelector('form[aria-label="Quote form"]')?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Form demo: connect this to your CRM or email workflow.');
-        });
-    </script>
+  // Hero tabs
+  const tabQuote = document.getElementById('tabQuote');
+  const tabTrack = document.getElementById('tabTrack');
+  const panelQuote = document.getElementById('panelQuote');
+  const panelTrack = document.getElementById('panelTrack');
+
+  function selectTab(which){
+    const isQuote = which === 'quote';
+    tabQuote.setAttribute('aria-selected', String(isQuote));
+    tabTrack.setAttribute('aria-selected', String(!isQuote));
+    panelQuote.hidden = !isQuote;
+    panelTrack.hidden = isQuote;
+  }
+  tabQuote?.addEventListener('click', () => selectTab('quote'));
+  tabTrack?.addEventListener('click', () => selectTab('track'));
+
+  // FAQ accordion (single-open)
+  document.querySelectorAll('.faq-item .faq-q').forEach((q) => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.hasAttribute('open');
+      document.querySelectorAll('.faq-item[open]').forEach(el => el.removeAttribute('open'));
+      document.querySelectorAll('.faq-q').forEach(el => el.setAttribute('aria-expanded', 'false'));
+      if (!isOpen){
+        item.setAttribute('open', '');
+        q.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Demo-only form handling
+  document.getElementById('quoteForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Form demo: connect this to your CRM or email workflow.');
+  });
+  document.querySelector('form[aria-label="Mini quote form"]')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Mini quote demo: connect to your quoting flow.');
+  });
+</script>
 
 </body>
-
 </html>
