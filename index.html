@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftFlow Logistics - Global Shipping Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --dark: #1A1A2E;
+            --light: #F7F7F7;
+            --accent: #FFD23F;
+            --text: #2D2D2D;
+            --gray: #6C757D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "⚡";
+            font-size: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);
+            animation: slidePattern 20s linear infinite;
+        }
+
+        @keyframes slidePattern {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(20px) translateY(20px); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 5.5rem;
+            color: white;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: 5px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        /* Tracking Section */
+        .tracking-section {
+            background: white;
+            padding: 4rem 2rem;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .tracking-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .tracking-container h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .tracking-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tracking-form input {
+            flex: 1;
+            padding: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .tracking-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .tracking-form button {
+            padding: 1.2rem 2.5rem;
+        }
+
+        .tracking-result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tracking-result.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tracking-status {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .tracking-status::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ddd;
+            z-index: 0;
+        }
+
+        .status-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-icon {
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .status-step.completed .status-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .status-step.active .status-icon {
+            background: var(--accent);
+            color: var(--dark);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 50px,
+                rgba(255,255,255,0.02) 50px,
+                rgba(255,255,255,0.02) 100px
+            );
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .section-header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        .quote-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .quote-container h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-message {
+            display: none;
+            padding: 1rem;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 5px;
+            margin-top: 1rem;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .submit-message.active {
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-number {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 4rem;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .feature-item p {
+            color: var(--gray);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 0.2rem;
+        }
+
+        .contact-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .contact-item p {
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: var(--dark);
+                width: 100%;
+                padding: 2rem;
+                transition: left 0.3s;
+                gap: 1.5rem;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .tracking-form {
+                flex-direction: column;
+            }
+
+            .tracking-status {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .tracking-status::before {
+                width: 3px;
+                height: 100%;
+                left: 20px;
+                top: 0;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">SwiftFlow</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#tracking">Tracking</a></li>
+                <li><a href="#quote">Get Quote</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#quote" class="nav-cta">Request Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>GLOBAL LOGISTICS<br>SIMPLIFIED</h1>
+            <p class="subtitle">Fast. Reliable. Worldwide.</p>
+            <p>We deliver your cargo across continents with precision timing and complete transparency. From air freight to ocean shipping, trust SwiftFlow for all your logistics needs.</p>
+            <div class="hero-buttons">
+                <a href="#tracking" class="btn btn-primary">Track Shipment</a>
+                <a href="#quote" class="btn btn-outline">Get a Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="tracking-section" id="tracking">
+        <div class="tracking-container">
+            <h2>Track Your Shipment</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 1rem;">Enter your tracking number to get real-time updates</p>
+            <form class="tracking-form" id="trackingForm">
+                <input type="text" id="trackingNumber" placeholder="Enter tracking number (e.g., SF123456789)" required>
+                <button type="submit" class="btn btn-primary">Track Now</button>
+            </form>
+            <div class="tracking-result" id="trackingResult">
+                <h3 style="color: var(--dark); margin-bottom: 1rem;">Tracking Number: <span id="displayTrackingNumber"></span></h3>
+                <p style="margin-bottom: 1rem;"><strong>Status:</strong> <span id="currentStatus">In Transit</span></p>
+                <p style="margin-bottom: 1rem;"><strong>Origin:</strong> <span id="origin">Los Angeles, USA</span></p>
+                <p style="margin-bottom: 1rem;"><strong>Destination:</strong> <span id="destination">Tokyo, Japan</span></p>
+                <p style="margin-bottom: 1rem;"><strong>Estimated Delivery:</strong> <span id="estimatedDelivery">Feb 15, 2026</span></p>
+                
+                <div class="tracking-status">
+                    <div class="status-step completed">
+                        <div class="status-icon">📦</div>
+                        <div class="status-label">Picked Up</div>
+                    </div>
+                    <div class="status-step completed">
+                        <div class="status-icon">🏭</div>
+                        <div class="status-label">Processing</div>
+                    </div>
+                    <div class="status-step active">
+                        <div class="status-icon">✈️</div>
+                        <div class="status-label">In Transit</div>
+                    </div>
+                    <div class="status-step">
+                        <div class="status-icon">🚚</div>
+                        <div class="status-label">Out for Delivery</div>
+                    </div>
+                    <div class="status-step">
+                        <div class="status-icon">✅</div>
+                        <div class="status-label">Delivered</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>OUR SERVICES</h2>
+            <p>Comprehensive logistics solutions tailored to your business needs</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">✈️</div>
+                <h3>Air Freight</h3>
+                <p>Fast and secure air cargo services with global coverage. Perfect for time-sensitive shipments requiring expedited delivery worldwide.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚢</div>
+                <h3>Ocean Freight</h3>
+                <p>Cost-effective sea shipping solutions for large-volume cargo. Full container load (FCL) and less than container load (LCL) options available.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚚</div>
+                <h3>Ground Transport</h3>
+                <p>Reliable road freight services for domestic and cross-border deliveries. Door-to-door service with real-time tracking capabilities.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📦</div>
+                <h3>Warehousing</h3>
+                <p>State-of-the-art storage facilities with inventory management systems. Climate-controlled options and flexible storage solutions.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Customs Clearance</h3>
+                <p>Expert customs brokerage services to streamline international shipping. Complete documentation and compliance support.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Supply Chain</h3>
+                <p>End-to-end supply chain management solutions. Optimize your logistics operations with our expert consulting services.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header">
+            <h2 style="color: var(--dark);">WHY CHOOSE US</h2>
+            <p style="color: var(--gray);">Numbers that speak for themselves</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <span class="feature-number">150+</span>
+                <h3>Countries Served</h3>
+                <p>Global network coverage</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-number">24/7</span>
+                <h3>Customer Support</h3>
+                <p>Always here to help</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-number">99.8%</span>
+                <h3>On-Time Delivery</h3>
+                <p>Industry-leading reliability</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-number">500K+</span>
+                <h3>Shipments Handled</h3>
+                <p>Annual delivery volume</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section" id="quote">
+        <div class="quote-container">
+            <h2>Request a Quote</h2>
+            <form id="quoteForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceType">Service Type *</label>
+                        <select id="serviceType" required>
+                            <option value="">Select a service</option>
+                            <option value="air">Air Freight</option>
+                            <option value="ocean">Ocean Freight</option>
+                            <option value="ground">Ground Transport</option>
+                            <option value="warehousing">Warehousing</option>
+                            <option value="customs">Customs Clearance</option>
+                            <option value="supply">Supply Chain Management</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Estimated Weight (kg)</label>
+                        <input type="number" id="weight" placeholder="e.g., 500">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="origin">Origin City *</label>
+                        <input type="text" id="origin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination City *</label>
+                        <input type="text" id="destination" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="details">Additional Details</label>
+                    <textarea id="details" placeholder="Tell us more about your shipment requirements..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Get Quote</button>
+                <div class="submit-message" id="quoteMessage">
+                    Thank you! We've received your quote request and will contact you within 24 hours.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <h2 style="color: var(--dark);">GET IN TOUCH</h2>
+            <p style="color: var(--gray);">We're here to answer your questions</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📍</div>
+                    <div>
+                        <h4>Address</h4>
+                        <p>1234 Logistics Boulevard<br>Los Angeles, CA 90001, USA</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📞</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+1 (800) 123-4567<br>+1 (800) 765-4321</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">✉️</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@swiftflow.com<br>support@swiftflow.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">⏰</div>
+                    <div>
+                        <h4>Business Hours</h4>
+                        <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+            <div>
+                <h3 style="font-family: 'Bebas Neue', cursive; font-size: 2rem; color: var(--dark); margin-bottom: 1.5rem; letter-spacing: 1px;">Send Us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Name *</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email *</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    <div class="submit-message" id="contactMessage">
+                        Thank you for your message! We'll get back to you soon.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>SwiftFlow Logistics</h4>
+                <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">Your trusted partner in global logistics. Delivering excellence across continents since 2010.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#tracking">Track Shipment</a></li>
+                    <li><a href="#quote">Get Quote</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Air Freight</a></li>
+                    <li><a href="#">Ocean Freight</a></li>
+                    <li><a href="#">Ground Transport</a></li>
+                    <li><a href="#">Warehousing</a></li>
+                    <li><a href="#">Customs Clearance</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SwiftFlow Logistics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Tracking Form
+        const trackingForm = document.getElementById('trackingForm');
+        const trackingResult = document.getElementById('trackingResult');
+        const trackingNumber = document.getElementById('trackingNumber');
+        const displayTrackingNumber = document.getElementById('displayTrackingNumber');
+
+        trackingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const number = trackingNumber.value;
+            
+            // Simulate tracking lookup
+            displayTrackingNumber.textContent = number;
+            trackingResult.classList.add('active');
+            
+            // Scroll to result
+            trackingResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Reset form
+            trackingForm.reset();
+        });
+
+        // Quote Form
+        const quoteForm = document.getElementById('quoteForm');
+        const quoteMessage = document.getElementById('quoteMessage');
+
+        quoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success message
+            quoteMessage.classList.add('active');
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                quoteMessage.classList.remove('active');
+            }, 5000);
+            
+            // Reset form
+            quoteForm.reset();
+            
+            // Scroll to message
+            quoteMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // Contact Form
+        const contactForm = document.getElementById('contactForm');
+        const contactMessage = document.getElementById('contactMessage');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success message
+            contactMessage.classList.add('active');
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                contactMessage.classList.remove('active');
+            }, 5000);
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Scroll to message
+            contactMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // Intersection Observer for animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Observe feature items
+        document.querySelectorAll('.feature-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
